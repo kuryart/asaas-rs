@@ -1,0 +1,380 @@
+info:
+  name: Criar e atualizar informações fiscais
+  type: http
+  seq: 2
+  tags:
+    - Informações fiscais
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/fiscalInfo/"
+  body:
+    type: multipart-form
+    data:
+      - name: email
+        type: text
+        value: john.doe@asaas.com.br
+        description: Email utilizado pelo Asaas para enviar notificações e alertas de notas fiscais
+      - name: municipalInscription
+        type: text
+        value: "21779501"
+        description: Inscrição municipal da empresa
+      - name: simplesNacional
+        type: text
+        value: "false"
+        description: Indica se a empresa é optante pelo simples nacional
+      - name: culturalProjectsPromoter
+        type: text
+        value: "false"
+        description: Identifica se a empresa é classificada como incentivador cultural
+      - name: cnae
+        type: text
+        value: "6209100"
+        description: Código CNAE
+      - name: specialTaxRegime
+        type: text
+        value: "1"
+        description: Identificador do regime especial de tributação
+      - name: serviceListItem
+        type: text
+        value: ""
+        description: Item da lista de serviço, conforme http://www.planalto.gov.br/ccivil_03/leis/LCP/Lcp116.htm
+      - name: nbsCode
+        type: text
+        value: "1.0101"
+        description: Código NBS (Nomenclatura Brasileira de Serviços). Deve constar na NFS-e quando exigido pela prefeitura e/ou para serviços de importação ou exportação. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+      - name: rpsSerie
+        type: text
+        value: "1"
+        description: "Número de Série utilizado pela sua empresa para emissão de notas fiscais. Para NFSe no padrão nacional, a série deve seguir a forma de autenticação: Certificado digital (00001 a 49999) ou Usuário e senha (80000 a 89999). Para emissão municipal, na maioria das cidades o número de série utilizado é '1' ou 'E'"
+      - name: rpsNumber
+        type: text
+        value: "1"
+        description: Número do RPS utilizado na última nota fiscal emitida pela sua empresa. Se a sua última NF emitida tem RPS igual a '100', esse campo deve ser preenchido com '101'. Se você nunca emitiu notas fiscais pelo site da sua prefeitura, informe '1' nesse campo
+      - name: loteNumber
+        type: text
+        value: "1"
+        description: Número do Lote utilizado na última nota fiscal emitida pela sua empresa. Se o último lote utilizado na sua prefeitura for '25', esse campo deve ser preenchido com '26'. Informe esse campo apenas se sua prefeitura exigir a utilização de lotes
+      - name: username
+        type: text
+        value: johndoe
+        description: Usuário para acesso ao site da prefeitura da sua cidade
+      - name: password
+        type: text
+        value: ""
+        description: Senha para acesso ao site da prefeitura
+      - name: accessToken
+        type: text
+        value: ""
+        description: Token de acesso ao site da prefeitura (Caso o acesso ao site da sua prefeitura seja através por Token)
+      - name: certificateFile
+        type: file
+        value: []
+        description: Arquivo
+      - name: certificatePassword
+        type: text
+        value: ""
+        description: Senha do certificado digital enviado (Caso o acesso ao site da sua prefeitura através de certificado digital)
+      - name: nationalPortalTaxCalculationRegime
+        type: text
+        value: ""
+        description: Identificador do regime de apuração tributária pelo Simples Nacional. Deve ser preenchido somente por empresas enquadradas como ME ou EPP optantes do Simples Nacional. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: email
+            type: text
+            value: john.doe@asaas.com.br
+            description: Email utilizado pelo Asaas para enviar notificações e alertas de notas fiscais
+          - name: municipalInscription
+            type: text
+            value: "21779501"
+            description: Inscrição municipal da empresa
+          - name: simplesNacional
+            type: text
+            value: "false"
+            description: Indica se a empresa é optante pelo simples nacional
+          - name: culturalProjectsPromoter
+            type: text
+            value: "false"
+            description: Identifica se a empresa é classificada como incentivador cultural
+          - name: cnae
+            type: text
+            value: "6209100"
+            description: Código CNAE
+          - name: specialTaxRegime
+            type: text
+            value: "1"
+            description: Identificador do regime especial de tributação
+          - name: serviceListItem
+            type: text
+            value: ""
+            description: Item da lista de serviço, conforme http://www.planalto.gov.br/ccivil_03/leis/LCP/Lcp116.htm
+          - name: nbsCode
+            type: text
+            value: "1.0101"
+            description: Código NBS (Nomenclatura Brasileira de Serviços). Deve constar na NFS-e quando exigido pela prefeitura e/ou para serviços de importação ou exportação. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+          - name: rpsSerie
+            type: text
+            value: "1"
+            description: "Número de Série utilizado pela sua empresa para emissão de notas fiscais. Para NFSe no padrão nacional, a série deve seguir a forma de autenticação: Certificado digital (00001 a 49999) ou Usuário e senha (80000 a 89999). Para emissão municipal, na maioria das cidades o número de série utilizado é '1' ou 'E'"
+          - name: rpsNumber
+            type: text
+            value: "1"
+            description: Número do RPS utilizado na última nota fiscal emitida pela sua empresa. Se a sua última NF emitida tem RPS igual a '100', esse campo deve ser preenchido com '101'. Se você nunca emitiu notas fiscais pelo site da sua prefeitura, informe '1' nesse campo
+          - name: loteNumber
+            type: text
+            value: "1"
+            description: Número do Lote utilizado na última nota fiscal emitida pela sua empresa. Se o último lote utilizado na sua prefeitura for '25', esse campo deve ser preenchido com '26'. Informe esse campo apenas se sua prefeitura exigir a utilização de lotes
+          - name: username
+            type: text
+            value: johndoe
+            description: Usuário para acesso ao site da prefeitura da sua cidade
+          - name: password
+            type: text
+            value: ""
+            description: Senha para acesso ao site da prefeitura
+          - name: accessToken
+            type: text
+            value: ""
+            description: Token de acesso ao site da prefeitura (Caso o acesso ao site da sua prefeitura seja através por Token)
+          - name: certificateFile
+            type: file
+            value: []
+            description: Arquivo
+          - name: certificatePassword
+            type: text
+            value: ""
+            description: Senha do certificado digital enviado (Caso o acesso ao site da sua prefeitura através de certificado digital)
+          - name: nationalPortalTaxCalculationRegime
+            type: text
+            value: ""
+            description: Identificador do regime de apuração tributária pelo Simples Nacional. Deve ser preenchido somente por empresas enquadradas como ME ou EPP optantes do Simples Nacional. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "customerFiscalInfo",
+            "email": "john.doe@asaas.com.br",
+            "municipalInscription": "21779501",
+            "simplesNacional": false,
+            "culturalProjectsPromoter": false,
+            "cnae": "6209100",
+            "specialTaxRegime": "1",
+            "serviceListItem": null,
+            "nbsCode": "1.0101",
+            "rpsSerie": "1",
+            "rpsNumber": 1,
+            "loteNumber": 1,
+            "username": "johndoe",
+            "passwordSent": true,
+            "accessTokenSent": true,
+            "certificateSent": true,
+            "nationalPortalTaxCalculationRegime": null
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: email
+            type: text
+            value: john.doe@asaas.com.br
+            description: Email utilizado pelo Asaas para enviar notificações e alertas de notas fiscais
+          - name: municipalInscription
+            type: text
+            value: "21779501"
+            description: Inscrição municipal da empresa
+          - name: simplesNacional
+            type: text
+            value: "false"
+            description: Indica se a empresa é optante pelo simples nacional
+          - name: culturalProjectsPromoter
+            type: text
+            value: "false"
+            description: Identifica se a empresa é classificada como incentivador cultural
+          - name: cnae
+            type: text
+            value: "6209100"
+            description: Código CNAE
+          - name: specialTaxRegime
+            type: text
+            value: "1"
+            description: Identificador do regime especial de tributação
+          - name: serviceListItem
+            type: text
+            value: ""
+            description: Item da lista de serviço, conforme http://www.planalto.gov.br/ccivil_03/leis/LCP/Lcp116.htm
+          - name: nbsCode
+            type: text
+            value: "1.0101"
+            description: Código NBS (Nomenclatura Brasileira de Serviços). Deve constar na NFS-e quando exigido pela prefeitura e/ou para serviços de importação ou exportação. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+          - name: rpsSerie
+            type: text
+            value: "1"
+            description: "Número de Série utilizado pela sua empresa para emissão de notas fiscais. Para NFSe no padrão nacional, a série deve seguir a forma de autenticação: Certificado digital (00001 a 49999) ou Usuário e senha (80000 a 89999). Para emissão municipal, na maioria das cidades o número de série utilizado é '1' ou 'E'"
+          - name: rpsNumber
+            type: text
+            value: "1"
+            description: Número do RPS utilizado na última nota fiscal emitida pela sua empresa. Se a sua última NF emitida tem RPS igual a '100', esse campo deve ser preenchido com '101'. Se você nunca emitiu notas fiscais pelo site da sua prefeitura, informe '1' nesse campo
+          - name: loteNumber
+            type: text
+            value: "1"
+            description: Número do Lote utilizado na última nota fiscal emitida pela sua empresa. Se o último lote utilizado na sua prefeitura for '25', esse campo deve ser preenchido com '26'. Informe esse campo apenas se sua prefeitura exigir a utilização de lotes
+          - name: username
+            type: text
+            value: johndoe
+            description: Usuário para acesso ao site da prefeitura da sua cidade
+          - name: password
+            type: text
+            value: ""
+            description: Senha para acesso ao site da prefeitura
+          - name: accessToken
+            type: text
+            value: ""
+            description: Token de acesso ao site da prefeitura (Caso o acesso ao site da sua prefeitura seja através por Token)
+          - name: certificateFile
+            type: file
+            value: []
+            description: Arquivo
+          - name: certificatePassword
+            type: text
+            value: ""
+            description: Senha do certificado digital enviado (Caso o acesso ao site da sua prefeitura através de certificado digital)
+          - name: nationalPortalTaxCalculationRegime
+            type: text
+            value: ""
+            description: Identificador do regime de apuração tributária pelo Simples Nacional. Deve ser preenchido somente por empresas enquadradas como ME ou EPP optantes do Simples Nacional. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: email
+            type: text
+            value: john.doe@asaas.com.br
+            description: Email utilizado pelo Asaas para enviar notificações e alertas de notas fiscais
+          - name: municipalInscription
+            type: text
+            value: "21779501"
+            description: Inscrição municipal da empresa
+          - name: simplesNacional
+            type: text
+            value: "false"
+            description: Indica se a empresa é optante pelo simples nacional
+          - name: culturalProjectsPromoter
+            type: text
+            value: "false"
+            description: Identifica se a empresa é classificada como incentivador cultural
+          - name: cnae
+            type: text
+            value: "6209100"
+            description: Código CNAE
+          - name: specialTaxRegime
+            type: text
+            value: "1"
+            description: Identificador do regime especial de tributação
+          - name: serviceListItem
+            type: text
+            value: ""
+            description: Item da lista de serviço, conforme http://www.planalto.gov.br/ccivil_03/leis/LCP/Lcp116.htm
+          - name: nbsCode
+            type: text
+            value: "1.0101"
+            description: Código NBS (Nomenclatura Brasileira de Serviços). Deve constar na NFS-e quando exigido pela prefeitura e/ou para serviços de importação ou exportação. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+          - name: rpsSerie
+            type: text
+            value: "1"
+            description: "Número de Série utilizado pela sua empresa para emissão de notas fiscais. Para NFSe no padrão nacional, a série deve seguir a forma de autenticação: Certificado digital (00001 a 49999) ou Usuário e senha (80000 a 89999). Para emissão municipal, na maioria das cidades o número de série utilizado é '1' ou 'E'"
+          - name: rpsNumber
+            type: text
+            value: "1"
+            description: Número do RPS utilizado na última nota fiscal emitida pela sua empresa. Se a sua última NF emitida tem RPS igual a '100', esse campo deve ser preenchido com '101'. Se você nunca emitiu notas fiscais pelo site da sua prefeitura, informe '1' nesse campo
+          - name: loteNumber
+            type: text
+            value: "1"
+            description: Número do Lote utilizado na última nota fiscal emitida pela sua empresa. Se o último lote utilizado na sua prefeitura for '25', esse campo deve ser preenchido com '26'. Informe esse campo apenas se sua prefeitura exigir a utilização de lotes
+          - name: username
+            type: text
+            value: johndoe
+            description: Usuário para acesso ao site da prefeitura da sua cidade
+          - name: password
+            type: text
+            value: ""
+            description: Senha para acesso ao site da prefeitura
+          - name: accessToken
+            type: text
+            value: ""
+            description: Token de acesso ao site da prefeitura (Caso o acesso ao site da sua prefeitura seja através por Token)
+          - name: certificateFile
+            type: file
+            value: []
+            description: Arquivo
+          - name: certificatePassword
+            type: text
+            value: ""
+            description: Senha do certificado digital enviado (Caso o acesso ao site da sua prefeitura através de certificado digital)
+          - name: nationalPortalTaxCalculationRegime
+            type: text
+            value: ""
+            description: Identificador do regime de apuração tributária pelo Simples Nacional. Deve ser preenchido somente por empresas enquadradas como ME ou EPP optantes do Simples Nacional. Consulte a necessidade desta informação com a sua prefeitura ou a sua contabilidade.
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

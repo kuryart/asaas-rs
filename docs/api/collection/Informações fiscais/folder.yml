@@ -1,0 +1,7 @@
+info:
+  name: Informações fiscais
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

@@ -1,0 +1,7 @@
+info:
+  name: Envio de documentos White Label
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

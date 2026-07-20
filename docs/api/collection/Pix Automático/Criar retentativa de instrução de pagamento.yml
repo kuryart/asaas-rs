@@ -1,0 +1,158 @@
+info:
+  name: Criar retentativa de instrução de pagamento
+  type: http
+  seq: 7
+  tags:
+    - Pix Automático
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id/retries"
+  params:
+    - name: id
+      value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+      type: path
+      description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+  body:
+    type: json
+    data: |-
+      {
+        "dueDate": "2020-01-31"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 201 Response
+    description: Created
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id/retries"
+      method: POST
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "dueDate": "2020-01-31"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c",
+            "endToEndIdentifier": "E00416968202111161635q5bk0brYk2C",
+            "authorization": {
+              "id": "35363f6e-93e2-11ec-b9d9-96f4053b1bd4",
+              "endToEndIdentifier": "RR1234567820240115abcdefghijk",
+              "customerId": "cus_000005735721"
+            },
+            "dueDate": "2020-01-31",
+            "status": "SCHEDULED",
+            "paymentId": "pay_tsp88gie3b5e6o2p",
+            "purpose": "RETRY_AFTER_DUE_DATE",
+            "refusalReason": null,
+            "retryAttempt": 1
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id/retries"
+      method: POST
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "dueDate": "2020-01-31"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_action",
+                "description": "A autorização não permite retentativas extradia."
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id/retries"
+      method: POST
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "dueDate": "2020-01-31"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id/retries"
+      method: POST
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "dueDate": "2020-01-31"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,183 @@
+info:
+  name: Cancelar uma transação agendada
+  type: http
+  seq: 5
+  tags:
+    - Transações Pix
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/pix/transactions/:id/cancel"
+  params:
+    - name: id
+      value: "null"
+      type: path
+      description: Identificador único da transação Pix agendada a ser cancelada.
+  body:
+    type: json
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da transação Pix agendada a ser cancelada.
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "35363f6e-93e2-11ec-b9d9-96f4053b1bd4",
+            "endToEndIdentifier": "E00416968202111161635q5bk0brYk2C",
+            "finality": "WITHDRAWAL",
+            "value": 10,
+            "changeValue": null,
+            "refundedValue": 0,
+            "effectiveDate": "2022-01-13 10:49:59",
+            "scheduledDate": "2022-10-18",
+            "status": "SCHEDULED",
+            "type": "DEBIT",
+            "originType": "DYNAMIC_QRCODE",
+            "conciliationIdentifier": "dcabae5bbfb6nffbb87c693883656483",
+            "description": null,
+            "transactionReceiptUrl": null,
+            "refusalReason": null,
+            "canBeCanceled": true,
+            "originalTransaction": {
+              "id": null,
+              "endToEndIdentifier": null,
+              "value": null,
+              "effectiveDate": null
+            },
+            "externalAccount": {
+              "ispb": "416968",
+              "ispbName": "Banco exemplo S.A",
+              "name": "John Doe",
+              "cpfCnpj": "***.456.789-**",
+              "addressKey": "12345678910",
+              "addressKeyType": "CPF"
+            },
+            "qrCode": {
+              "payer": {
+                "name": "Elon Musk",
+                "cpfCnpj": "***.456.789-**"
+              },
+              "conciliationIdentifier": "dcabae5bbfb6nffbb87c693883656483",
+              "originalValue": 99,
+              "dueDate": "2030-02-05",
+              "interest": 1,
+              "fine": 3,
+              "discount": 5,
+              "expirationDate": "2030-02-10 11:00:00",
+              "description": "Churrasco"
+            },
+            "payment": "pay_0491859546906926",
+            "canBeRefunded": true,
+            "refundDisabledReason": null,
+            "chargedFeeValue": 0.99,
+            "dateCreated": "023-02-14 10:42:55",
+            "addressKey": null,
+            "addressKeyType": "CPF",
+            "transferId": null,
+            "externalReference": null
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da transação Pix agendada a ser cancelada.
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da transação Pix agendada a ser cancelada.
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da transação Pix agendada a ser cancelada.
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

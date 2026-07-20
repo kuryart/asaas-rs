@@ -1,0 +1,306 @@
+info:
+  name: Criar configuração para emissão de Notas Fiscais
+  type: http
+  seq: 10
+  tags:
+    - Assinaturas
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/subscriptions/:id/invoiceSettings"
+  params:
+    - name: id
+      value: sub_VXJBYgP2u0eO
+      type: path
+      description: Identificador único da assinatura no Asaas
+  body:
+    type: json
+    data: |-
+      {
+        "municipalServiceId": null,
+        "municipalServiceCode": "1.01",
+        "municipalServiceName": null,
+        "updatePayment": false,
+        "deductions": 55,
+        "effectiveDatePeriod": "ON_PAYMENT_CONFIRMATION",
+        "receivedOnly": null,
+        "daysBeforeDueDate": null,
+        "observations": "Referente aos trabalhos de março",
+        "taxes": {
+          "nbsCode": "01.01",
+          "taxSituationCode": "011",
+          "taxClassificationCode": "011001",
+          "operationIndicatorCode": "020101",
+          "retainIss": true,
+          "iss": 2,
+          "pisCofinsRetentionType": "NOT_WITHHELD",
+          "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+          "operationPis": 0.65,
+          "operationCofins": 3,
+          "useTaxSystemReformNT007": true,
+          "pis": 0.65,
+          "cofins": 3,
+          "csll": 9,
+          "inss": 11,
+          "ir": 1.5
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id/invoiceSettings"
+      method: POST
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "municipalServiceId": null,
+            "municipalServiceCode": "1.01",
+            "municipalServiceName": null,
+            "updatePayment": false,
+            "deductions": 55,
+            "effectiveDatePeriod": "ON_PAYMENT_CONFIRMATION",
+            "receivedOnly": null,
+            "daysBeforeDueDate": null,
+            "observations": "Referente aos trabalhos de março",
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "municipalServiceId": null,
+            "municipalServiceCode": "1.01",
+            "municipalServiceName": null,
+            "deductions": 55,
+            "invoiceCreationPeriod": "ON_PAYMENT_CONFIRMATION",
+            "daysBeforeDueDate": null,
+            "receivedOnly": null,
+            "observations": "Referente aos trabalhos de março",
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5,
+              "stateIbs": 0.1,
+              "stateIbsValue": 0.3,
+              "municipalIbs": 0,
+              "municipalIbsValue": 0,
+              "cbs": 0.9,
+              "cbsValue": 2.7
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id/invoiceSettings"
+      method: POST
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "municipalServiceId": null,
+            "municipalServiceCode": "1.01",
+            "municipalServiceName": null,
+            "updatePayment": false,
+            "deductions": 55,
+            "effectiveDatePeriod": "ON_PAYMENT_CONFIRMATION",
+            "receivedOnly": null,
+            "daysBeforeDueDate": null,
+            "observations": "Referente aos trabalhos de março",
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id/invoiceSettings"
+      method: POST
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "municipalServiceId": null,
+            "municipalServiceCode": "1.01",
+            "municipalServiceName": null,
+            "updatePayment": false,
+            "deductions": 55,
+            "effectiveDatePeriod": "ON_PAYMENT_CONFIRMATION",
+            "receivedOnly": null,
+            "daysBeforeDueDate": null,
+            "observations": "Referente aos trabalhos de março",
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id/invoiceSettings"
+      method: POST
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "municipalServiceId": null,
+            "municipalServiceCode": "1.01",
+            "municipalServiceName": null,
+            "updatePayment": false,
+            "deductions": 55,
+            "effectiveDatePeriod": "ON_PAYMENT_CONFIRMATION",
+            "receivedOnly": null,
+            "daysBeforeDueDate": null,
+            "observations": "Referente aos trabalhos de março",
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,119 @@
+info:
+  name: Encerrar subconta não-BaaS
+  type: http
+  seq: 4
+  tags:
+    - Subcontas Asaas
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v3/accounts/:id"
+  params:
+    - name: id
+      value: 4f468235-cec3-482f-b3d0-348af4c71940
+      type: path
+      description: Identificador único da subconta no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c71940
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "deleted": true,
+            "id": "4f468235-cec3-482f-b3d0-348af4c71940"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c71940
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_action",
+                "description": "A subconta já foi encerrada"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c71940
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c71940
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+
+docs: Encerra uma subconta não-BaaS. Esta ação é irreversível e não é permitida para subcontas já encerradas.

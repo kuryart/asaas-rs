@@ -1,0 +1,7 @@
+info:
+  name: Link de pagamentos
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

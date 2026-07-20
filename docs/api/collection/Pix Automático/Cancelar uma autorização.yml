@@ -1,0 +1,138 @@
+info:
+  name: Cancelar uma autorização
+  type: http
+  seq: 4
+  tags:
+    - Pix Automático
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v3/pix/automatic/authorizations/:id"
+  params:
+    - name: id
+      value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+      type: path
+      description: Identificador único da autorização de Pix Automático no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/authorizations/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da autorização de Pix Automático no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "a33047b1-fb19-4b68-9373-a7ba8a8162aa",
+            "minLimitValue": 50,
+            "cancellationDate": null,
+            "cancellationReason": null,
+            "contractId": "XXXYYYY1234",
+            "customerId": "cus_000005735721",
+            "description": "Serviços de Streaming de Música e Filmes",
+            "finishDate": "2024-12-31",
+            "frequency": "MONTHLY",
+            "endToEndIdentifier": "RR1234567820240115abcdefghijk",
+            "startDate": "2024-01-01",
+            "status": "ACTIVE",
+            "value": 100,
+            "payload": null,
+            "encodedImage": null,
+            "immediateQrCode": {
+              "conciliationIdentifier": "E12345678202401011234567890123456",
+              "expirationDate": "2024-01-01 12:00:00"
+            },
+            "originType": "IMMEDIATE_PAYMENT_AND_RECURRING_QR_CODE",
+            "subscriptionId": "sub_000005735721",
+            "paymentCreationMode": "MANUAL",
+            "retryPolicy": "NOT_ALLOWED"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/authorizations/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da autorização de Pix Automático no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/authorizations/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da autorização de Pix Automático no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/authorizations/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da autorização de Pix Automático no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

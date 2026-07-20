@@ -1,0 +1,691 @@
+info:
+  name: Listar chargebacks
+  type: http
+  seq: 2
+  tags:
+    - Chargeback
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/chargebacks/"
+  params:
+    - name: offset
+      value: "0"
+      type: query
+      description: Elemento inicial da lista
+    - name: limit
+      value: "10"
+      type: query
+      description: "Número de elementos da lista (max: 100)"
+    - name: creditCardBrand
+      value: VISA
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: MASTERCARD
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: ELO
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: DINERS
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: DISCOVER
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: AMEX
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: CABAL
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: BANESCARD
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: CREDZ
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: SOROCRED
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: CREDSYSTEM
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: JCB
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: creditCardBrand
+      value: UNKNOWN
+      type: query
+      description: Filtrar por bandeira do cartão utilizado.
+      disabled: true
+    - name: originDisputeDate[le]
+      value: 2024-12-05
+      type: query
+      description: Filtrar até uma data de abertura de chargeback.
+    - name: originDisputeDate[ge]
+      value: 2023-11-01
+      type: query
+      description: Filtrar a partir de uma data de abertura de chargeback.
+    - name: originTransactionDate[le]
+      value: 2024-12-05
+      type: query
+      description: Filtrar até uma data de transação.
+    - name: originTransactionDate[ge]
+      value: 2024-10-10
+      type: query
+      description: Filtrar a partir de uma data de transação.
+    - name: status
+      value: REQUESTED
+      type: query
+      description: Filtrar por status do chargeback.
+      disabled: true
+    - name: status
+      value: IN_DISPUTE
+      type: query
+      description: Filtrar por status do chargeback.
+      disabled: true
+    - name: status
+      value: DISPUTE_LOST
+      type: query
+      description: Filtrar por status do chargeback.
+      disabled: true
+    - name: status
+      value: REVERSED
+      type: query
+      description: Filtrar por status do chargeback.
+      disabled: true
+    - name: status
+      value: DONE
+      type: query
+      description: Filtrar por status do chargeback.
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/chargebacks/"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: creditCardBrand
+          value: VISA
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: MASTERCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: ELO
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DINERS
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DISCOVER
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: AMEX
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CABAL
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: BANESCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDZ
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: SOROCRED
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDSYSTEM
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: JCB
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: UNKNOWN
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: originDisputeDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de abertura de chargeback.
+        - name: originDisputeDate[ge]
+          value: 2023-11-01
+          type: query
+          description: Filtrar a partir de uma data de abertura de chargeback.
+        - name: originTransactionDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de transação.
+        - name: originTransactionDate[ge]
+          value: 2024-10-10
+          type: query
+          description: Filtrar a partir de uma data de transação.
+        - name: status
+          value: REQUESTED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: IN_DISPUTE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DISPUTE_LOST
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: REVERSED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "id": "8e784c3e-afe8-4844-bb93-6b445763",
+                "payment": "pay_pBtDdshgBD2Rt",
+                "installment": "b8dd74c-d078-40a0-9ae1-61a66c61a204",
+                "customerAccount": "cus_000000004085",
+                "status": "DONE",
+                "reason": "COMMERCIAL_DISAGREEMENT",
+                "disputeStartDate": "2024-11-10",
+                "value": 2323.45,
+                "paymentDate": "2024-03-10",
+                "creditCard": {
+                  "number": "8829",
+                  "brand": "VISA"
+                },
+                "disputeStatus": "ACCEPTED",
+                "deadlineToSendDisputeDocuments": "2024-12-10"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/chargebacks/"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: creditCardBrand
+          value: VISA
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: MASTERCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: ELO
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DINERS
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DISCOVER
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: AMEX
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CABAL
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: BANESCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDZ
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: SOROCRED
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDSYSTEM
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: JCB
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: UNKNOWN
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: originDisputeDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de abertura de chargeback.
+        - name: originDisputeDate[ge]
+          value: 2023-11-01
+          type: query
+          description: Filtrar a partir de uma data de abertura de chargeback.
+        - name: originTransactionDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de transação.
+        - name: originTransactionDate[ge]
+          value: 2024-10-10
+          type: query
+          description: Filtrar a partir de uma data de transação.
+        - name: status
+          value: REQUESTED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: IN_DISPUTE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DISPUTE_LOST
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: REVERSED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/chargebacks/"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: creditCardBrand
+          value: VISA
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: MASTERCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: ELO
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DINERS
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DISCOVER
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: AMEX
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CABAL
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: BANESCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDZ
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: SOROCRED
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDSYSTEM
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: JCB
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: UNKNOWN
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: originDisputeDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de abertura de chargeback.
+        - name: originDisputeDate[ge]
+          value: 2023-11-01
+          type: query
+          description: Filtrar a partir de uma data de abertura de chargeback.
+        - name: originTransactionDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de transação.
+        - name: originTransactionDate[ge]
+          value: 2024-10-10
+          type: query
+          description: Filtrar a partir de uma data de transação.
+        - name: status
+          value: REQUESTED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: IN_DISPUTE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DISPUTE_LOST
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: REVERSED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/chargebacks/"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: creditCardBrand
+          value: VISA
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: MASTERCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: ELO
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DINERS
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: DISCOVER
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: AMEX
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CABAL
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: BANESCARD
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDZ
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: SOROCRED
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: CREDSYSTEM
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: JCB
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: creditCardBrand
+          value: UNKNOWN
+          type: query
+          description: Filtrar por bandeira do cartão utilizado.
+          disabled: true
+        - name: originDisputeDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de abertura de chargeback.
+        - name: originDisputeDate[ge]
+          value: 2023-11-01
+          type: query
+          description: Filtrar a partir de uma data de abertura de chargeback.
+        - name: originTransactionDate[le]
+          value: 2024-12-05
+          type: query
+          description: Filtrar até uma data de transação.
+        - name: originTransactionDate[ge]
+          value: 2024-10-10
+          type: query
+          description: Filtrar a partir de uma data de transação.
+        - name: status
+          value: REQUESTED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: IN_DISPUTE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DISPUTE_LOST
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: REVERSED
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status do chargeback.
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+
+docs: Este método retorna uma lista paginada com todos os chargebacks para o(s) filtro(s) informado(s).

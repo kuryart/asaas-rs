@@ -1,0 +1,292 @@
+info:
+  name: Criar nova cobrança com dados resumidos na resposta
+  type: http
+  seq: 1
+  tags:
+    - Cobranças com dados resumidos
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/lean/payments"
+  body:
+    type: json
+    data: |-
+      {
+        "customer": "cus_G7Dvo4iphUNk",
+        "billingType": "BOLETO",
+        "value": 129.9,
+        "dueDate": "2017-06-10",
+        "description": "Pedido 056984",
+        "daysAfterDueDateToRegistrationCancellation": 1,
+        "externalReference": "056984",
+        "installmentCount": null,
+        "totalValue": null,
+        "installmentValue": null,
+        "discount": {
+          "value": 10,
+          "dueDateLimitDays": 0,
+          "type": "PERCENTAGE"
+        },
+        "interest": {
+          "value": null
+        },
+        "fine": {
+          "value": null,
+          "type": "FIXED"
+        },
+        "postalService": false,
+        "split": [
+          {
+            "walletId": null,
+            "fixedValue": null,
+            "percentualValue": null,
+            "totalFixedValue": null,
+            "externalReference": null,
+            "description": null
+          }
+        ],
+        "callback": {
+          "successUrl": null,
+          "autoRedirect": null
+        },
+        "pixAutomaticAuthorizationId": "89060430-aceb-447c-a981-07ee15daf00c"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/lean/payments"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_G7Dvo4iphUNk",
+            "billingType": "BOLETO",
+            "value": 129.9,
+            "dueDate": "2017-06-10",
+            "description": "Pedido 056984",
+            "daysAfterDueDateToRegistrationCancellation": 1,
+            "externalReference": "056984",
+            "installmentCount": null,
+            "totalValue": null,
+            "installmentValue": null,
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "interest": {
+              "value": null
+            },
+            "fine": {
+              "value": null,
+              "type": "FIXED"
+            },
+            "postalService": false,
+            "split": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null
+              }
+            ],
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            },
+            "pixAutomaticAuthorizationId": "89060430-aceb-447c-a981-07ee15daf00c"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "payment",
+            "id": "pay_080225913252",
+            "dateCreated": "2017-03-10",
+            "customerId": "cus_G7Dvo4iphUNk",
+            "subscriptionId": null,
+            "installmentId": null,
+            "paymentLinkId": null,
+            "value": 129.9,
+            "netValue": 124.9,
+            "originalValue": null,
+            "interestValue": null,
+            "description": "Pedido 056984",
+            "billingType": "BOLETO",
+            "canBePaidAfterDueDate": true,
+            "confirmedDate": "2017-03-10",
+            "pixTransactionId": null,
+            "status": "PENDING",
+            "dueDate": "2017-06-10",
+            "originalDueDate": "2017-06-10",
+            "paymentDate": null,
+            "customerPaymentDate": null,
+            "installmentNumber": null,
+            "externalReference": "056984",
+            "deleted": false,
+            "anticipated": false,
+            "anticipable": false,
+            "creditDate": "2017-03-10",
+            "transactionReceiptUrl": null,
+            "duplicatedPaymentId": null,
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "fine": {
+              "value": 1
+            },
+            "interest": {
+              "value": 2
+            },
+            "postalService": false
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/lean/payments"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_G7Dvo4iphUNk",
+            "billingType": "BOLETO",
+            "value": 129.9,
+            "dueDate": "2017-06-10",
+            "description": "Pedido 056984",
+            "daysAfterDueDateToRegistrationCancellation": 1,
+            "externalReference": "056984",
+            "installmentCount": null,
+            "totalValue": null,
+            "installmentValue": null,
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "interest": {
+              "value": null
+            },
+            "fine": {
+              "value": null,
+              "type": "FIXED"
+            },
+            "postalService": false,
+            "split": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null
+              }
+            ],
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            },
+            "pixAutomaticAuthorizationId": "89060430-aceb-447c-a981-07ee15daf00c"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_customer",
+                "description": "Customer Inválido ou não informado"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/lean/payments"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_G7Dvo4iphUNk",
+            "billingType": "BOLETO",
+            "value": 129.9,
+            "dueDate": "2017-06-10",
+            "description": "Pedido 056984",
+            "daysAfterDueDateToRegistrationCancellation": 1,
+            "externalReference": "056984",
+            "installmentCount": null,
+            "totalValue": null,
+            "installmentValue": null,
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "interest": {
+              "value": null
+            },
+            "fine": {
+              "value": null,
+              "type": "FIXED"
+            },
+            "postalService": false,
+            "split": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null
+              }
+            ],
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            },
+            "pixAutomaticAuthorizationId": "89060430-aceb-447c-a981-07ee15daf00c"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

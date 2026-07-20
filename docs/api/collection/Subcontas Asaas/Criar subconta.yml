@@ -1,0 +1,264 @@
+info:
+  name: Criar subconta
+  type: http
+  seq: 1
+  tags:
+    - Subcontas Asaas
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/accounts"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "John Doe",
+        "email": "john.doe@asaas.com.br",
+        "loginEmail": "johndoe@asaas.com.br",
+        "cpfCnpj": "35381637000150",
+        "birthDate": "1995-04-12",
+        "companyType": "MEI",
+        "phone": null,
+        "mobilePhone": null,
+        "site": "https://www.example.com",
+        "incomeValue": 25000,
+        "address": "Rua Fernando Orlandi",
+        "addressNumber": "544",
+        "complement": null,
+        "province": "Jardim Pedra Branca",
+        "postalCode": "14079-452",
+        "webhooks": [
+          {
+            "name": "Nome exemplo",
+            "url": "https://www.example.com/webhook/asaas",
+            "email": "john.doe@asaas.com.br",
+            "enabled": true,
+            "interrupted": false,
+            "apiVersion": 3,
+            "authToken": "whsec_Pxeh17yy3LQbLVpnzz6I1chB7mtzYk5F7pg8bRR80pE",
+            "sendType": "SEQUENTIALLY",
+            "events": [
+              "PAYMENT_RECEIVED",
+              "PAYMENT_CONFIRMED"
+            ]
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/accounts"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "loginEmail": "johndoe@asaas.com.br",
+            "cpfCnpj": "35381637000150",
+            "birthDate": "1995-04-12",
+            "companyType": "MEI",
+            "phone": null,
+            "mobilePhone": null,
+            "site": "https://www.example.com",
+            "incomeValue": 25000,
+            "address": "Rua Fernando Orlandi",
+            "addressNumber": "544",
+            "complement": null,
+            "province": "Jardim Pedra Branca",
+            "postalCode": "14079-452",
+            "webhooks": [
+              {
+                "name": "Nome exemplo",
+                "url": "https://www.example.com/webhook/asaas",
+                "email": "john.doe@asaas.com.br",
+                "enabled": true,
+                "interrupted": false,
+                "apiVersion": 3,
+                "authToken": "whsec_Pxeh17yy3LQbLVpnzz6I1chB7mtzYk5F7pg8bRR80pE",
+                "sendType": "SEQUENTIALLY",
+                "events": [
+                  "PAYMENT_RECEIVED",
+                  "PAYMENT_CONFIRMED"
+                ]
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "account",
+            "id": "4f468235-cec3-482f-b3d0-348af4c7194",
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "loginEmail": "john.doe@asaas.com.br",
+            "phone": null,
+            "mobilePhone": null,
+            "address": "Rua Fernando Orlandi",
+            "addressNumber": "544",
+            "complement": null,
+            "province": "Jardim Pedra Branca",
+            "postalCode": "14079-452",
+            "cpfCnpj": "35381637000150",
+            "birthDate": "1995-04-12",
+            "personType": "JURIDICA",
+            "companyType": "MEI",
+            "city": 15478,
+            "state": "SP",
+            "country": "Brasil",
+            "tradingName": null,
+            "site": "https://www.example.com",
+            "walletId": "c0c1688f-636b-42c0-b6ee-7339182276b7",
+            "accountNumber": {
+              "agency": "0001",
+              "account": "3514",
+              "accountDigit": "3"
+            },
+            "commercialInfoExpiration": {
+              "isExpired": false,
+              "scheduledDate": "2025-05-05 00:00:00"
+            },
+            "accessToken": {
+              "id": "b6bff0c5-38c6-496a-a3a8-105b31d5bcfe",
+              "name": "My API Access Token",
+              "enabled": false,
+              "disabledReason": "MANUAL",
+              "expirationDate": "2026-12-31 12:30:50",
+              "dateCreated": "2026-01-01 08:00:00",
+              "projectedExpirationDateByLackOfUse": "2026-06-01",
+              "apiKey": "$aact_hmlg_xxxxx"
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/accounts"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "loginEmail": "johndoe@asaas.com.br",
+            "cpfCnpj": "35381637000150",
+            "birthDate": "1995-04-12",
+            "companyType": "MEI",
+            "phone": null,
+            "mobilePhone": null,
+            "site": "https://www.example.com",
+            "incomeValue": 25000,
+            "address": "Rua Fernando Orlandi",
+            "addressNumber": "544",
+            "complement": null,
+            "province": "Jardim Pedra Branca",
+            "postalCode": "14079-452",
+            "webhooks": [
+              {
+                "name": "Nome exemplo",
+                "url": "https://www.example.com/webhook/asaas",
+                "email": "john.doe@asaas.com.br",
+                "enabled": true,
+                "interrupted": false,
+                "apiVersion": 3,
+                "authToken": "whsec_Pxeh17yy3LQbLVpnzz6I1chB7mtzYk5F7pg8bRR80pE",
+                "sendType": "SEQUENTIALLY",
+                "events": [
+                  "PAYMENT_RECEIVED",
+                  "PAYMENT_CONFIRMED"
+                ]
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/accounts"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "loginEmail": "johndoe@asaas.com.br",
+            "cpfCnpj": "35381637000150",
+            "birthDate": "1995-04-12",
+            "companyType": "MEI",
+            "phone": null,
+            "mobilePhone": null,
+            "site": "https://www.example.com",
+            "incomeValue": 25000,
+            "address": "Rua Fernando Orlandi",
+            "addressNumber": "544",
+            "complement": null,
+            "province": "Jardim Pedra Branca",
+            "postalCode": "14079-452",
+            "webhooks": [
+              {
+                "name": "Nome exemplo",
+                "url": "https://www.example.com/webhook/asaas",
+                "email": "john.doe@asaas.com.br",
+                "enabled": true,
+                "interrupted": false,
+                "apiVersion": 3,
+                "authToken": "whsec_Pxeh17yy3LQbLVpnzz6I1chB7mtzYk5F7pg8bRR80pE",
+                "sendType": "SEQUENTIALLY",
+                "events": [
+                  "PAYMENT_RECEIVED",
+                  "PAYMENT_CONFIRMED"
+                ]
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

@@ -1,0 +1,7 @@
+info:
+  name: Transações Pix
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

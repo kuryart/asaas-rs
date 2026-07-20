@@ -1,0 +1,142 @@
+info:
+  name: Recuperar uma única chave
+  type: http
+  seq: 3
+  tags:
+    - Pix
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/pix/addressKeys/:id"
+  params:
+    - name: id
+      value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+      type: path
+      description: Identificador único da chave Pix no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys/:id"
+      method: GET
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da chave Pix no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "a33047b1-fb19-4b68-9373-a7ba8a8162aa",
+            "key": "b6295ee1-f054-47d1-9e90-ee57b74f60d9",
+            "type": "EVP",
+            "status": "ACTIVE",
+            "dateCreated": "2022-02-07 17:17:48",
+            "canBeDeleted": true,
+            "cannotBeDeletedReason": null,
+            "qrCode": {
+              "encodedImage": "QRCODE IMAGE IN BASE64",
+              "payload": "00020126580014br.gov.bcb.pix0136a9fe43bc-164d-44d1-91c2-2f9b4d6956e95204000053039865802BR5925Joao da Silva6009Joinville62290525JOAOSILVA00000055ASA6304E62B"
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys/:id"
+      method: GET
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da chave Pix no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys/:id"
+      method: GET
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da chave Pix no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys/:id"
+      method: GET
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da chave Pix no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys/:id"
+      method: GET
+      params:
+        - name: id
+          value: a33047b1-fb19-4b68-9373-a7ba8a8162aa
+          type: path
+          description: Identificador único da chave Pix no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

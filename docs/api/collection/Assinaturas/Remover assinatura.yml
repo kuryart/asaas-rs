@@ -1,0 +1,117 @@
+info:
+  name: Remover assinatura
+  type: http
+  seq: 6
+  tags:
+    - Assinaturas
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v3/subscriptions/:id"
+  params:
+    - name: id
+      value: sub_VXJBYgP2u0eO
+      type: path
+      description: Identificador único da assinatura no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "deleted": true,
+            "id": "sub_VXJBYgP2u0eO"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/subscriptions/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: sub_VXJBYgP2u0eO
+          type: path
+          description: Identificador único da assinatura no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

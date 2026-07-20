@@ -1,0 +1,182 @@
+info:
+  name: Atualizar chave de API de uma subconta
+  type: http
+  seq: 8
+  tags:
+    - Subcontas Asaas
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v3/accounts/:id/accessTokens/:accessTokenId"
+  params:
+    - name: id
+      value: b6bff0c5-38c6-496a-a3a8-105b31d5bcfe
+      type: path
+      description: Identificador único da subconta no Asaas
+    - name: accessTokenId
+      value: 279baa3b-2cfd-4d41-b04b-e3299ae4b645
+      type: path
+      description: ID da chave de API
+  body:
+    type: json
+    data: |-
+      {
+        "name": "My API Access Token",
+        "enabled": true,
+        "expirationDate": "2026-12-31 12:30:50"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/accessTokens/:accessTokenId"
+      method: PUT
+      params:
+        - name: id
+          value: b6bff0c5-38c6-496a-a3a8-105b31d5bcfe
+          type: path
+          description: Identificador único da subconta no Asaas
+        - name: accessTokenId
+          value: 279baa3b-2cfd-4d41-b04b-e3299ae4b645
+          type: path
+          description: ID da chave de API
+      body:
+        type: json
+        data: |-
+          {
+            "name": "My API Access Token",
+            "enabled": true,
+            "expirationDate": "2026-12-31 12:30:50"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "b6bff0c5-38c6-496a-a3a8-105b31d5bcfe",
+            "name": "My API Access Token",
+            "enabled": false,
+            "disabledReason": "MANUAL",
+            "expirationDate": "2026-12-31 12:30:50",
+            "dateCreated": "2026-01-01 08:00:00",
+            "projectedExpirationDateByLackOfUse": "2026-06-01"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/accessTokens/:accessTokenId"
+      method: PUT
+      params:
+        - name: id
+          value: b6bff0c5-38c6-496a-a3a8-105b31d5bcfe
+          type: path
+          description: Identificador único da subconta no Asaas
+        - name: accessTokenId
+          value: 279baa3b-2cfd-4d41-b04b-e3299ae4b645
+          type: path
+          description: ID da chave de API
+      body:
+        type: json
+        data: |-
+          {
+            "name": "My API Access Token",
+            "enabled": true,
+            "expirationDate": "2026-12-31 12:30:50"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/accessTokens/:accessTokenId"
+      method: PUT
+      params:
+        - name: id
+          value: b6bff0c5-38c6-496a-a3a8-105b31d5bcfe
+          type: path
+          description: Identificador único da subconta no Asaas
+        - name: accessTokenId
+          value: 279baa3b-2cfd-4d41-b04b-e3299ae4b645
+          type: path
+          description: ID da chave de API
+      body:
+        type: json
+        data: |-
+          {
+            "name": "My API Access Token",
+            "enabled": true,
+            "expirationDate": "2026-12-31 12:30:50"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/accessTokens/:accessTokenId"
+      method: PUT
+      params:
+        - name: id
+          value: b6bff0c5-38c6-496a-a3a8-105b31d5bcfe
+          type: path
+          description: Identificador único da subconta no Asaas
+        - name: accessTokenId
+          value: 279baa3b-2cfd-4d41-b04b-e3299ae4b645
+          type: path
+          description: ID da chave de API
+      body:
+        type: json
+        data: |-
+          {
+            "name": "My API Access Token",
+            "enabled": true,
+            "expirationDate": "2026-12-31 12:30:50"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,461 @@
+info:
+  name: Listar splits pagos
+  type: http
+  seq: 2
+  tags:
+    - Splits
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/payments/splits/paid"
+  params:
+    - name: offset
+      value: "0"
+      type: query
+      description: Elemento inicial da lista
+    - name: limit
+      value: "10"
+      type: query
+      description: "Número de elementos da lista (max: 100)"
+    - name: paymentId
+      value: "null"
+      type: query
+      description: Filtrar pelo ID da cobrança
+    - name: status
+      value: PENDING
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: PROCESSING
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: PROCESSING_REFUND
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: AWAITING_CREDIT
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: CANCELLED
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: DONE
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: REFUNDED
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: BLOCKED_BY_VALUE_DIVERGENCE
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: paymentConfirmedDate[ge]
+      value: "null"
+      type: query
+      description: Filtrar a partir da data de confirmação da cobrança inicial
+    - name: paymentConfirmedDate[le]
+      value: "null"
+      type: query
+      description: Filtrar a partir da data de confirmação da cobrança final
+    - name: creditDate[ge]
+      value: "null"
+      type: query
+      description: Filtrar a partir da data de envio do split inicial
+    - name: creditDate[le]
+      value: "null"
+      type: query
+      description: Filtrar a partir da data de envio do split final
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/payments/splits/paid"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: paymentId
+          value: "null"
+          type: query
+          description: Filtrar pelo ID da cobrança
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING_REFUND
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: AWAITING_CREDIT
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: BLOCKED_BY_VALUE_DIVERGENCE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: paymentConfirmedDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança inicial
+        - name: paymentConfirmedDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança final
+        - name: creditDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split inicial
+        - name: creditDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split final
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "id": "fd41396a-7453-47d0-9411-c8543522591d",
+                "walletId": "7bafd95a-e783-4a62-9be1-23999af742c6",
+                "fixedValue": 20.32,
+                "percentualValue": null,
+                "totalValue": 20.32,
+                "cancellationReason": "MANUAL_CANCELLATION",
+                "status": "PENDING",
+                "externalReference": null,
+                "description": null,
+                "originAccountId": "dd6daeb7-a89b-4f37-968b-f53dd450c987",
+                "destinationAccountId": "0e42da80-1347-4f4f-b6a9-80142ec90dd2",
+                "creditDate": "2026-03-11",
+                "payment": {
+                  "confirmedDate": "2026-03-11",
+                  "invoiceNumber": "00110291",
+                  "externalReference": null
+                }
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/payments/splits/paid"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: paymentId
+          value: "null"
+          type: query
+          description: Filtrar pelo ID da cobrança
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING_REFUND
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: AWAITING_CREDIT
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: BLOCKED_BY_VALUE_DIVERGENCE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: paymentConfirmedDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança inicial
+        - name: paymentConfirmedDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança final
+        - name: creditDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split inicial
+        - name: creditDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split final
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/payments/splits/paid"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: paymentId
+          value: "null"
+          type: query
+          description: Filtrar pelo ID da cobrança
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING_REFUND
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: AWAITING_CREDIT
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: BLOCKED_BY_VALUE_DIVERGENCE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: paymentConfirmedDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança inicial
+        - name: paymentConfirmedDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança final
+        - name: creditDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split inicial
+        - name: creditDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split final
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/payments/splits/paid"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: paymentId
+          value: "null"
+          type: query
+          description: Filtrar pelo ID da cobrança
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: PROCESSING_REFUND
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: AWAITING_CREDIT
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: BLOCKED_BY_VALUE_DIVERGENCE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: paymentConfirmedDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança inicial
+        - name: paymentConfirmedDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de confirmação da cobrança final
+        - name: creditDate[ge]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split inicial
+        - name: creditDate[le]
+          value: "null"
+          type: query
+          description: Filtrar a partir da data de envio do split final
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,133 @@
+info:
+  name: Visualizar documento enviado
+  type: http
+  seq: 3
+  tags:
+    - Envio de documentos White Label
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/myAccount/documents/files/:id"
+  params:
+    - name: id
+      value: 8d257732-2220-11ec-b695-b6af4a64184d
+      type: path
+      description: Identificador único do documento no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents/files/:id"
+      method: GET
+      params:
+        - name: id
+          value: 8d257732-2220-11ec-b695-b6af4a64184d
+          type: path
+          description: Identificador único do documento no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "8d257732-2220-11ec-b695-b6af4a64184d",
+            "status": "PENDING"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents/files/:id"
+      method: GET
+      params:
+        - name: id
+          value: 8d257732-2220-11ec-b695-b6af4a64184d
+          type: path
+          description: Identificador único do documento no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents/files/:id"
+      method: GET
+      params:
+        - name: id
+          value: 8d257732-2220-11ec-b695-b6af4a64184d
+          type: path
+          description: Identificador único do documento no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents/files/:id"
+      method: GET
+      params:
+        - name: id
+          value: 8d257732-2220-11ec-b695-b6af4a64184d
+          type: path
+          description: Identificador único do documento no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents/files/:id"
+      method: GET
+      params:
+        - name: id
+          value: 8d257732-2220-11ec-b695-b6af4a64184d
+          type: path
+          description: Identificador único do documento no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

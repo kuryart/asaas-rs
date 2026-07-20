@@ -1,0 +1,184 @@
+info:
+  name: Cancelar um checkout
+  type: http
+  seq: 2
+  tags:
+    - Checkout
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/checkouts/:id/cancel"
+  params:
+    - name: id
+      value: 131ca662-56c8-4479-b5b3-fd61a413fce7
+      type: path
+      description: Identificador único do checkout no Asaas
+  body:
+    type: json
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/checkouts/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: 131ca662-56c8-4479-b5b3-fd61a413fce7
+          type: path
+          description: Identificador único do checkout no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "131ca662-56c8-4479-b5b3-fd61a413fce7",
+            "link": "https://sandbox.asaas.com/checkoutSession/show/131ca662-56c8-4479-b5b3-fd61a413fce7",
+            "status": "ACTIVE",
+            "billingTypes": [
+              "CREDIT_CARD"
+            ],
+            "chargeTypes": [
+              "RECURRENT"
+            ],
+            "minutesToExpire": 100,
+            "externalReference": "dcf4dff9-b080-425c-b234-765f2ffac0ae",
+            "callback": {
+              "successUrl": "https://example.com/asaas/checkout/success",
+              "cancelUrl": "https://example.com/asaas/checkout/cancel",
+              "expiredUrl": "https://example.com/asaas/checkout/expired"
+            },
+            "items": [
+              {
+                "externalReference": "09cabea0-b31f-4a1b-8270-736fad4f43e5",
+                "description": "Camisetas",
+                "imageBase64": "IMAGE IN BASE64",
+                "name": "Roupas",
+                "quantity": 2,
+                "value": 100
+              }
+            ],
+            "customerData": {
+              "name": "John Doe",
+              "cpfCnpj": "24971563792",
+              "email": "john.doe@asaas.com.br",
+              "phone": "4738010919",
+              "address": "Av. Paulista",
+              "addressNumber": "150",
+              "complement": "Sala 201",
+              "province": "Centro",
+              "postalCode": "01310-000",
+              "city": "12987382"
+            },
+            "subscription": {
+              "cycle": "MONTHLY",
+              "endDate": "2025-01-01",
+              "nextDueDate": "2025-01-01"
+            },
+            "installment": {
+              "maxInstallmentCount": 1
+            },
+            "split": [
+              {
+                "walletId": "7bafd95a-e783-4a62-9be1-23999af742c6",
+                "fixedValue": "Comissão referente ao serviço utilizado",
+                "percentageValue": 10,
+                "totalFixedValue": 15
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/checkouts/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: 131ca662-56c8-4479-b5b3-fd61a413fce7
+          type: path
+          description: Identificador único do checkout no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/checkouts/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: 131ca662-56c8-4479-b5b3-fd61a413fce7
+          type: path
+          description: Identificador único do checkout no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/checkouts/:id/cancel"
+      method: POST
+      params:
+        - name: id
+          value: 131ca662-56c8-4479-b5b3-fd61a413fce7
+          type: path
+          description: Identificador único do checkout no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

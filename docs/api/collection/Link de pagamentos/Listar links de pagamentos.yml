@@ -1,0 +1,241 @@
+info:
+  name: Listar links de pagamentos
+  type: http
+  seq: 2
+  tags:
+    - Link de pagamentos
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/paymentLinks"
+  params:
+    - name: offset
+      value: "0"
+      type: query
+      description: Elemento inicial da lista
+    - name: limit
+      value: "10"
+      type: query
+      description: "Número de elementos da lista (max: 100)"
+    - name: active
+      value: "null"
+      type: query
+      description: Filtrar por links de pagamentos ativados ou desativados
+    - name: includeDeleted
+      value: "null"
+      type: query
+      description: True para recuperar também os links de pagamentos removidos
+    - name: name
+      value: "null"
+      type: query
+      description: Filtrar pelo nome do link de pagamentos
+    - name: externalReference
+      value: "null"
+      type: query
+      description: Filtrar pelo Identificador do seu sistema
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: active
+          value: "null"
+          type: query
+          description: Filtrar por links de pagamentos ativados ou desativados
+        - name: includeDeleted
+          value: "null"
+          type: query
+          description: True para recuperar também os links de pagamentos removidos
+        - name: name
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do link de pagamentos
+        - name: externalReference
+          value: "null"
+          type: query
+          description: Filtrar pelo Identificador do seu sistema
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "id": "725104409743",
+                "name": "Venda de livros",
+                "value": 50,
+                "active": true,
+                "chargeType": "DETACHED",
+                "url": "https://www.asaas.com/c/291089675759",
+                "billingType": "UNDEFINED",
+                "subscriptionCycle": "MONTHLY",
+                "description": "Qualquer livro por apenas R$: 50,00",
+                "endDate": "2024-09-05",
+                "deleted": false,
+                "viewCount": 0,
+                "maxInstallmentCount": 1,
+                "dueDateLimitDays": 10,
+                "notificationEnabled": true,
+                "isAddressRequired": true,
+                "externalReference": "056984"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: active
+          value: "null"
+          type: query
+          description: Filtrar por links de pagamentos ativados ou desativados
+        - name: includeDeleted
+          value: "null"
+          type: query
+          description: True para recuperar também os links de pagamentos removidos
+        - name: name
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do link de pagamentos
+        - name: externalReference
+          value: "null"
+          type: query
+          description: Filtrar pelo Identificador do seu sistema
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: active
+          value: "null"
+          type: query
+          description: Filtrar por links de pagamentos ativados ou desativados
+        - name: includeDeleted
+          value: "null"
+          type: query
+          description: True para recuperar também os links de pagamentos removidos
+        - name: name
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do link de pagamentos
+        - name: externalReference
+          value: "null"
+          type: query
+          description: Filtrar pelo Identificador do seu sistema
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: active
+          value: "null"
+          type: query
+          description: Filtrar por links de pagamentos ativados ou desativados
+        - name: includeDeleted
+          value: "null"
+          type: query
+          description: True para recuperar também os links de pagamentos removidos
+        - name: name
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do link de pagamentos
+        - name: externalReference
+          value: "null"
+          type: query
+          description: Filtrar pelo Identificador do seu sistema
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

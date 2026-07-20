@@ -1,0 +1,107 @@
+info:
+  name: Recuperar informações fiscais
+  type: http
+  seq: 3
+  tags:
+    - Informações fiscais
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/fiscalInfo/"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "customerFiscalInfo",
+            "email": "john.doe@asaas.com.br",
+            "municipalInscription": "21779501",
+            "simplesNacional": false,
+            "culturalProjectsPromoter": false,
+            "cnae": "6209100",
+            "specialTaxRegime": "1",
+            "serviceListItem": null,
+            "nbsCode": "1.0101",
+            "rpsSerie": "1",
+            "rpsNumber": 1,
+            "loteNumber": 1,
+            "username": "johndoe",
+            "passwordSent": true,
+            "accessTokenSent": true,
+            "certificateSent": true,
+            "nationalPortalTaxCalculationRegime": null
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: GET
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/"
+      method: GET
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

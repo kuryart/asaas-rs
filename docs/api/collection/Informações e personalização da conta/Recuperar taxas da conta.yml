@@ -1,0 +1,163 @@
+info:
+  name: Recuperar taxas da conta
+  type: http
+  seq: 6
+  tags:
+    - Informações e personalização da conta
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/myAccount/fees/"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/myAccount/fees/"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "payment": {
+              "bankSlip": {
+                "defaultValue": 6.96,
+                "discountValue": 3.99,
+                "expirationDate": "2019-05-19 00:00:00",
+                "daysToReceive": 1
+              },
+              "creditCard": {
+                "operationValue": 0.49,
+                "oneInstallmentPercentage": 2.99,
+                "upToSixInstallmentsPercentage": 2.99,
+                "upToTwelveInstallmentsPercentage": 2.99,
+                "upToTwentyOneInstallmentsPercentage": 4.29,
+                "discountOneInstallmentPercentage": 1.99,
+                "discountUpToSixInstallmentsPercentage": 1.99,
+                "discountUpToTwelveInstallmentsPercentage": 1.99,
+                "discountUpToTwentyOneInstallmentsPercentage": 3.29,
+                "discountExpiration": "2019-05-19 00:00:00",
+                "daysToReceive": 32
+              },
+              "debitCard": {
+                "operationValue": 0.35,
+                "defaultPercentage": 1.89,
+                "daysToReceive": 3
+              },
+              "pix": {
+                "fixedFeeValue": null,
+                "fixedFeeValueWithDiscount": null,
+                "percentageFee": 0.99,
+                "minimumFeeValue": 0.29,
+                "maximumFeeValue": 1.99,
+                "discountExpiration": null,
+                "monthlyCreditsWithoutFee": 30,
+                "creditsReceivedOfCurrentMonth": 10
+              }
+            },
+            "transfer": {
+              "monthlyTransfersWithoutFee": 30,
+              "ted": {
+                "feeValue": 5,
+                "consideredInMonthlyTransfersWithoutFee": true
+              },
+              "pix": {
+                "feeValue": 5,
+                "discountValue": null,
+                "expirationDate": null,
+                "consideredInMonthlyTransfersWithoutFee": true
+              }
+            },
+            "notification": {
+              "phoneCallFeeValue": 0.55,
+              "whatsAppFeeValue": 0.55,
+              "messagingFeeValue": 0.99
+            },
+            "creditBureauReport": {
+              "naturalPersonFeeValue": 16.99,
+              "legalPersonFeeValue": 16.99
+            },
+            "paymentDunning": {
+              "feeValue": 9.9
+            },
+            "invoice": {
+              "feeValue": 0.99
+            },
+            "anticipation": {
+              "creditCard": {
+                "detachedMonthlyFeeValue": 2.49,
+                "installmentMonthlyFeeValue": 2
+              },
+              "bankSlip": {
+                "monthlyFeePercentage": 4.99
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/myAccount/fees/"
+      method: GET
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/myAccount/fees/"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/myAccount/fees/"
+      method: GET
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

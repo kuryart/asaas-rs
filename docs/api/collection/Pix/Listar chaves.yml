@@ -1,0 +1,320 @@
+info:
+  name: Listar chaves
+  type: http
+  seq: 2
+  tags:
+    - Pix
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/pix/addressKeys"
+  params:
+    - name: offset
+      value: "0"
+      type: query
+      description: Elemento inicial da lista
+    - name: limit
+      value: "10"
+      type: query
+      description: "Número de elementos da lista (max: 100)"
+    - name: status
+      value: AWAITING_ACTIVATION
+      type: query
+      description: Filtrar pelo status atual da chave
+      disabled: true
+    - name: status
+      value: ACTIVE
+      type: query
+      description: Filtrar pelo status atual da chave
+      disabled: true
+    - name: status
+      value: AWAITING_DELETION
+      type: query
+      description: Filtrar pelo status atual da chave
+      disabled: true
+    - name: status
+      value: AWAITING_ACCOUNT_DELETION
+      type: query
+      description: Filtrar pelo status atual da chave
+      disabled: true
+    - name: status
+      value: DELETED
+      type: query
+      description: Filtrar pelo status atual da chave
+      disabled: true
+    - name: status
+      value: ERROR
+      type: query
+      description: Filtrar pelo status atual da chave
+      disabled: true
+    - name: statusList
+      value: "null"
+      type: query
+      description: Filtrar por um ou mais status das chaves
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_ACTIVATION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ACTIVE
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_ACCOUNT_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: DELETED
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ERROR
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: statusList
+          value: "null"
+          type: query
+          description: Filtrar por um ou mais status das chaves
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "data": [
+              {
+                "id": "a33047b1-fb19-4b68-9373-a7ba8a8162aa",
+                "key": "b6295ee1-f054-47d1-9e90-ee57b74f60d9",
+                "type": "EVP",
+                "status": "ACTIVE",
+                "dateCreated": "2022-02-07 17:17:48",
+                "canBeDeleted": true,
+                "cannotBeDeletedReason": null,
+                "qrCode": {
+                  "encodedImage": "QRCODE IMAGE IN BASE64",
+                  "payload": "00020126580014br.gov.bcb.pix0136a9fe43bc-164d-44d1-91c2-2f9b4d6956e95204000053039865802BR5925Joao da Silva6009Joinville62290525JOAOSILVA00000055ASA6304E62B"
+                }
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_ACTIVATION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ACTIVE
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_ACCOUNT_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: DELETED
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ERROR
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: statusList
+          value: "null"
+          type: query
+          description: Filtrar por um ou mais status das chaves
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_ACTIVATION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ACTIVE
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_ACCOUNT_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: DELETED
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ERROR
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: statusList
+          value: "null"
+          type: query
+          description: Filtrar por um ou mais status das chaves
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/pix/addressKeys"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_ACTIVATION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ACTIVE
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: AWAITING_ACCOUNT_DELETION
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: DELETED
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: status
+          value: ERROR
+          type: query
+          description: Filtrar pelo status atual da chave
+          disabled: true
+        - name: statusList
+          value: "null"
+          type: query
+          description: Filtrar por um ou mais status das chaves
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

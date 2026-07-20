@@ -1,0 +1,7 @@
+info:
+  name: Conta Escrow
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

@@ -1,0 +1,128 @@
+info:
+  name: Simular um pagamento de conta
+  type: http
+  seq: 3
+  tags:
+    - Pagamento de contas
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/bill/simulate"
+  body:
+    type: json
+    data: |-
+      {
+        "identificationField": "03399.77779 29900.000000 04751.101017 1 81510000002990",
+        "barCode": null
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/bill/simulate"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "identificationField": "03399.77779 29900.000000 04751.101017 1 81510000002990",
+            "barCode": null
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "minimumScheduleDate": "2021-11-22",
+            "fee": 0,
+            "bankSlipInfo": {
+              "identificationField": "03399201595100529040147600301023888440000421177",
+              "value": 4211.77,
+              "dueDate": "2021-12-24",
+              "companyName": null,
+              "bank": "033",
+              "beneficiaryCpfCnpj": "19.540.550/0001-21",
+              "beneficiaryName": "ASAAS GESTAO FINANCEIRA S.A.",
+              "allowChangeValue": false,
+              "minValue": 4211.77,
+              "maxValue": 4211.77,
+              "discountValue": 0,
+              "interestValue": 0,
+              "fineValue": 0,
+              "originalValue": 4211.77,
+              "totalDiscountValue": 0,
+              "totalAdditionalValue": 0,
+              "isOverdue": false
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/bill/simulate"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "identificationField": "03399.77779 29900.000000 04751.101017 1 81510000002990",
+            "barCode": null
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/bill/simulate"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "identificationField": "03399.77779 29900.000000 04751.101017 1 81510000002990",
+            "barCode": null
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

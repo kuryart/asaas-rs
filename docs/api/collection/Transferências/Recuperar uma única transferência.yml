@@ -1,0 +1,164 @@
+info:
+  name: Recuperar uma única transferência
+  type: http
+  seq: 4
+  tags:
+    - Transferências
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/transfers/:id"
+  params:
+    - name: id
+      value: 777eb7c8-b1a2-4356-8fd8-a1b0644b528
+      type: path
+      description: Identificador único da transferência no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/transfers/:id"
+      method: GET
+      params:
+        - name: id
+          value: 777eb7c8-b1a2-4356-8fd8-a1b0644b528
+          type: path
+          description: Identificador único da transferência no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "transfer",
+            "id": "777eb7c8-b1a2-4356-8fd8-a1b0644b5282",
+            "type": "BANK_ACCOUNT",
+            "dateCreated": "2019-05-02",
+            "value": 1000,
+            "netValue": 0,
+            "status": "PENDING",
+            "transferFee": 0,
+            "effectiveDate": "2019-05-02",
+            "scheduleDate": "2019-05-02",
+            "endToEndIdentifier": null,
+            "authorized": true,
+            "failReason": null,
+            "externalReference": null,
+            "transactionReceiptUrl": null,
+            "operationType": "TED",
+            "description": null,
+            "recurring": null,
+            "bankAccount": {
+              "bank": {
+                "ispb": null,
+                "code": "001",
+                "name": "Banco do Brasil"
+              },
+              "accountName": "Conta Banco do Brasil",
+              "ownerName": "John Doe",
+              "cpfCnpj": "***.143.689-**",
+              "agency": "1263",
+              "agencyDigit": "3",
+              "account": "9999991",
+              "accountDigit": "1",
+              "pixAddressKey": null
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/transfers/:id"
+      method: GET
+      params:
+        - name: id
+          value: 777eb7c8-b1a2-4356-8fd8-a1b0644b528
+          type: path
+          description: Identificador único da transferência no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/transfers/:id"
+      method: GET
+      params:
+        - name: id
+          value: 777eb7c8-b1a2-4356-8fd8-a1b0644b528
+          type: path
+          description: Identificador único da transferência no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/transfers/:id"
+      method: GET
+      params:
+        - name: id
+          value: 777eb7c8-b1a2-4356-8fd8-a1b0644b528
+          type: path
+          description: Identificador único da transferência no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/transfers/:id"
+      method: GET
+      params:
+        - name: id
+          value: 777eb7c8-b1a2-4356-8fd8-a1b0644b528
+          type: path
+          description: Identificador único da transferência no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

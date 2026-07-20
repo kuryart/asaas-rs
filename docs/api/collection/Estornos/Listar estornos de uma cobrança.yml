@@ -1,0 +1,154 @@
+info:
+  name: Listar estornos de uma cobrança
+  type: http
+  seq: 1
+  tags:
+    - Estornos
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/payments/:id/refunds"
+  params:
+    - name: id
+      value: "null"
+      type: path
+      description: Identificador único da cobrança no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/refunds"
+      method: GET
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "dateCreated": "2024-10-18 10:19:06",
+                "status": "DONE",
+                "value": 40,
+                "endToEndIdentifier": null,
+                "description": null,
+                "effectiveDate": "2024-10-19 10:19:06",
+                "transactionReceiptUrl": null,
+                "refundedSplits": [
+                  {
+                    "id": "cff860dd-148e-48ca-ac8e-849684175158",
+                    "value": 10,
+                    "done": true
+                  }
+                ]
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/refunds"
+      method: GET
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/refunds"
+      method: GET
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/refunds"
+      method: GET
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/refunds"
+      method: GET
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

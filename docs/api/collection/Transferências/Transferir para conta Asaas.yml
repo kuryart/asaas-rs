@@ -1,0 +1,137 @@
+info:
+  name: Transferir para conta Asaas
+  type: http
+  seq: 3
+  tags:
+    - Transferências
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/transfers/"
+  body:
+    type: json
+    data: |-
+      {
+        "value": 1000,
+        "walletId": "021c712-d963-4d86-a59d-031e7ac51a2e",
+        "externalReference": null
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/transfers/"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "value": 1000,
+            "walletId": "021c712-d963-4d86-a59d-031e7ac51a2e",
+            "externalReference": null
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "transfer",
+            "id": "777eb7c8-b1a2-4356-8fd8-a1b0644b5282",
+            "type": "BANK_ACCOUNT",
+            "dateCreated": "2019-05-02",
+            "value": 1000,
+            "netValue": 0,
+            "status": "PENDING",
+            "transferFee": 0,
+            "effectiveDate": "2019-05-02",
+            "scheduleDate": "2019-05-02",
+            "endToEndIdentifier": null,
+            "authorized": true,
+            "failReason": null,
+            "externalReference": null,
+            "transactionReceiptUrl": null,
+            "operationType": "TED",
+            "description": null,
+            "recurring": null,
+            "walletId": null,
+            "account": {
+              "name": "John Doe",
+              "cpfCnpj": "***.143.689-**",
+              "agency": "0001",
+              "account": "2087",
+              "accountDigit": "2"
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/transfers/"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "value": 1000,
+            "walletId": "021c712-d963-4d86-a59d-031e7ac51a2e",
+            "externalReference": null
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/transfers/"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "value": 1000,
+            "walletId": "021c712-d963-4d86-a59d-031e7ac51a2e",
+            "externalReference": null
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

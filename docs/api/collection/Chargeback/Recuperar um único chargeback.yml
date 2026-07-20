@@ -1,0 +1,148 @@
+info:
+  name: Recuperar um único chargeback
+  type: http
+  seq: 3
+  tags:
+    - Chargeback
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/payments/:id/chargeback"
+  params:
+    - name: id
+      value: pay_s02s330x4pox1x0y
+      type: path
+      description: Identificador único do pagamento ou do parcelamento para o qual o chargeback será recuperado.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/chargeback"
+      method: GET
+      params:
+        - name: id
+          value: pay_s02s330x4pox1x0y
+          type: path
+          description: Identificador único do pagamento ou do parcelamento para o qual o chargeback será recuperado.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "8e784c3e-afe8-4844-bb93-6b445763",
+            "payment": "pay_pBtDdshgBD2Rt",
+            "installment": "b8dd74c-d078-40a0-9ae1-61a66c61a204",
+            "customerAccount": "cus_000000004085",
+            "status": "DONE",
+            "reason": "COMMERCIAL_DISAGREEMENT",
+            "disputeStartDate": "2024-11-10",
+            "value": 2323.45,
+            "paymentDate": "2024-03-10",
+            "creditCard": {
+              "number": "8829",
+              "brand": "VISA"
+            },
+            "disputeStatus": "ACCEPTED",
+            "deadlineToSendDisputeDocuments": "2024-12-10"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/chargeback"
+      method: GET
+      params:
+        - name: id
+          value: pay_s02s330x4pox1x0y
+          type: path
+          description: Identificador único do pagamento ou do parcelamento para o qual o chargeback será recuperado.
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/chargeback"
+      method: GET
+      params:
+        - name: id
+          value: pay_s02s330x4pox1x0y
+          type: path
+          description: Identificador único do pagamento ou do parcelamento para o qual o chargeback será recuperado.
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/chargeback"
+      method: GET
+      params:
+        - name: id
+          value: pay_s02s330x4pox1x0y
+          type: path
+          description: Identificador único do pagamento ou do parcelamento para o qual o chargeback será recuperado.
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/chargeback"
+      method: GET
+      params:
+        - name: id
+          value: pay_s02s330x4pox1x0y
+          type: path
+          description: Identificador único do pagamento ou do parcelamento para o qual o chargeback será recuperado.
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+
+docs: Este endpoint recupera um chargeback específico a partir do ID de uma cobrança ou parcelamento.

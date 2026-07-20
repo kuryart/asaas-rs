@@ -1,0 +1,149 @@
+info:
+  name: Listar imagens de um link de pagamentos
+  type: http
+  seq: 8
+  tags:
+    - Link de pagamentos
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/paymentLinks/:id/images"
+  params:
+    - name: id
+      value: "725104409743"
+      type: path
+      description: Identificador único do seu link de pagamentos no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks/:id/images"
+      method: GET
+      params:
+        - name: id
+          value: "725104409743"
+          type: path
+          description: Identificador único do seu link de pagamentos no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "id": "417d1fe7-f530-4368-935f-699045f2bf5d",
+                "main": true,
+                "image": {
+                  "originalName": "cover.png",
+                  "size": 50859,
+                  "extension": "png",
+                  "previewUrl": "https://www.asaas.com/file/preview/XtW5OjqOBy3sskIcEMPj6yhr7T3aCLnSWEbIJd08gMNf3Rk7r5buwAXQ9xC2TNmg",
+                  "downloadUrl": "https://www.asaas.com/file/public/download/XtW5OjqOBy3sskIcEMPj6yhr7T3aCLnSWEbIJd08gMNf3Rk7r5buwAXQ9xC2TNmg"
+                }
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks/:id/images"
+      method: GET
+      params:
+        - name: id
+          value: "725104409743"
+          type: path
+          description: Identificador único do seu link de pagamentos no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks/:id/images"
+      method: GET
+      params:
+        - name: id
+          value: "725104409743"
+          type: path
+          description: Identificador único do seu link de pagamentos no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks/:id/images"
+      method: GET
+      params:
+        - name: id
+          value: "725104409743"
+          type: path
+          description: Identificador único do seu link de pagamentos no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks/:id/images"
+      method: GET
+      params:
+        - name: id
+          value: "725104409743"
+          type: path
+          description: Identificador único do seu link de pagamentos no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,7 @@
+info:
+  name: Ações em sandbox
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

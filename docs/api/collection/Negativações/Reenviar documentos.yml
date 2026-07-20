@@ -1,0 +1,173 @@
+info:
+  name: Reenviar documentos
+  type: http
+  seq: 8
+  tags:
+    - Negativações
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/paymentDunnings/:id/documents"
+  params:
+    - name: id
+      value: ce35702d-0d9f-475a-ba46-e251ad265c91
+      type: path
+      description: Identificador único da negativação no Asaas
+  body:
+    type: multipart-form
+    data:
+      - name: documents
+        type: file
+        value: []
+        description: Nota fiscal e/ou contrato com firma reconhecida em cartório
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id/documents"
+      method: POST
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+      body:
+        type: multipart-form
+        data:
+          - name: documents
+            type: file
+            value: []
+            description: Nota fiscal e/ou contrato com firma reconhecida em cartório
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "ce35702d-0d9f-475a-ba46-e251ad265c91",
+            "dunningNumber": 15,
+            "status": "PENDING",
+            "type": "CREDIT_BUREAU",
+            "payment": "pay_080225913252",
+            "requestDate": "2020-05-26",
+            "description": "Duas mesas com 8 cadeiras solicitadas via encomenda no dia 01/05/2018",
+            "value": 80,
+            "feeValue": 8,
+            "netValue": 72,
+            "receivedInCashFeeValue": 0,
+            "denialReason": null,
+            "cancellationFeeValue": 0,
+            "canBeCancelled": null,
+            "cannotBeCancelledReason": null,
+            "isNecessaryResendDocumentation": null
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id/documents"
+      method: POST
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+      body:
+        type: multipart-form
+        data:
+          - name: documents
+            type: file
+            value: []
+            description: Nota fiscal e/ou contrato com firma reconhecida em cartório
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id/documents"
+      method: POST
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+      body:
+        type: multipart-form
+        data:
+          - name: documents
+            type: file
+            value: []
+            description: Nota fiscal e/ou contrato com firma reconhecida em cartório
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id/documents"
+      method: POST
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+      body:
+        type: multipart-form
+        data:
+          - name: documents
+            type: file
+            value: []
+            description: Nota fiscal e/ou contrato com firma reconhecida em cartório
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+
+docs: |-
+  Permite o reenvio dos documentos de uma negativação em caso de negação.
+
+   Utilize a propriedade `isNecessaryResendDocumentation` retornado no objeto de negativação para verificar se é preciso o reenvio da documentação.
+
+   Após o reenvio sua negativação retornará para o status de `AWAITING_APPROVAL`.

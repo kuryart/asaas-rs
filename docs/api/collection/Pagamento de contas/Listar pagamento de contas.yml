@@ -1,0 +1,339 @@
+info:
+  name: Listar pagamento de contas
+  type: http
+  seq: 2
+  tags:
+    - Pagamento de contas
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/bill"
+  params:
+    - name: offset
+      value: "0"
+      type: query
+      description: Elemento inicial da lista
+    - name: limit
+      value: "10"
+      type: query
+      description: "Número de elementos da lista (max: 100)"
+    - name: status
+      value: PENDING
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+    - name: status
+      value: BANK_PROCESSING
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+    - name: status
+      value: PAID
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+    - name: status
+      value: FAILED
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+    - name: status
+      value: CANCELLED
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+    - name: status
+      value: REFUNDED
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+    - name: status
+      value: AWAITING_CHECKOUT_RISK_ANALYSIS_REQUEST
+      type: query
+      description: Filtrar pelo status do pagamento de conta
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/bill"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: BANK_PROCESSING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: PAID
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: FAILED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: AWAITING_CHECKOUT_RISK_ANALYSIS_REQUEST
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "object": "bill",
+                "id": "f1bce822-6f37-4905-8de8-f1af9f2f4bab",
+                "status": "PENDING",
+                "value": 29,
+                "discount": 0,
+                "interest": 0,
+                "fine": 0,
+                "identificationField": "03399.77779 29900.000000 04751.101017 1 81510000002990",
+                "dueDate": "2020-01-31",
+                "scheduleDate": "2020-01-31",
+                "paymentDate": null,
+                "fee": 0,
+                "description": "Celular 01/12",
+                "companyName": null,
+                "transactionReceiptUrl": "https://www.asaas.com/comprovantes/00016578",
+                "canBeCancelled": false,
+                "externalReference": null,
+                "failReasons": [
+                  null
+                ]
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/bill"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: BANK_PROCESSING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: PAID
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: FAILED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: AWAITING_CHECKOUT_RISK_ANALYSIS_REQUEST
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/bill"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: BANK_PROCESSING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: PAID
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: FAILED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: AWAITING_CHECKOUT_RISK_ANALYSIS_REQUEST
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/bill"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: BANK_PROCESSING
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: PAID
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: FAILED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: REFUNDED
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+        - name: status
+          value: AWAITING_CHECKOUT_RISK_ANALYSIS_REQUEST
+          type: query
+          description: Filtrar pelo status do pagamento de conta
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

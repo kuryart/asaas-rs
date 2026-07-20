@@ -1,0 +1,273 @@
+info:
+  name: Criar nova assinatura
+  type: http
+  seq: 1
+  tags:
+    - Assinaturas
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/subscriptions"
+  body:
+    type: json
+    data: |-
+      {
+        "customer": "cus_0T1mdomVMi39",
+        "billingType": "BOLETO",
+        "value": 19.9,
+        "nextDueDate": "2017-05-15",
+        "discount": {
+          "value": 10,
+          "dueDateLimitDays": 0,
+          "type": "PERCENTAGE"
+        },
+        "interest": {
+          "value": null
+        },
+        "fine": {
+          "value": null,
+          "type": "FIXED"
+        },
+        "cycle": "MONTHLY",
+        "description": "Assinatura Plano Pró",
+        "endDate": null,
+        "maxPayments": null,
+        "externalReference": null,
+        "split": [
+          {
+            "walletId": null,
+            "fixedValue": null,
+            "percentualValue": null,
+            "externalReference": null,
+            "description": null
+          }
+        ],
+        "callback": {
+          "successUrl": null,
+          "autoRedirect": null
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/subscriptions"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_0T1mdomVMi39",
+            "billingType": "BOLETO",
+            "value": 19.9,
+            "nextDueDate": "2017-05-15",
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "interest": {
+              "value": null
+            },
+            "fine": {
+              "value": null,
+              "type": "FIXED"
+            },
+            "cycle": "MONTHLY",
+            "description": "Assinatura Plano Pró",
+            "endDate": null,
+            "maxPayments": null,
+            "externalReference": null,
+            "split": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "externalReference": null,
+                "description": null
+              }
+            ],
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "subscription",
+            "id": "sub_VXJBYgP2u0eO",
+            "dateCreated": "2017-03-17",
+            "customer": "cus_0T1mdomVMi39",
+            "paymentLink": null,
+            "billingType": "BOLETO",
+            "cycle": "MONTHLY",
+            "value": 19.9,
+            "nextDueDate": "2017-06-15",
+            "endDate": "2018-06-15",
+            "description": "Assinatura Plano Pró",
+            "status": "ACTIVE",
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "fine": {
+              "value": 1
+            },
+            "interest": {
+              "value": 2
+            },
+            "deleted": false,
+            "maxPayments": 12,
+            "externalReference": null,
+            "checkoutSession": "356eb0c4-9eb7-4b7f-b2be-d9479af1d29f",
+            "split": [
+              {
+                "walletId": "7bafd95a-e783-4a62-9be1-23999af742c6",
+                "fixedValue": 20.32,
+                "percentualValue": null,
+                "externalReference": null,
+                "description": null,
+                "status": "ACTIVE",
+                "disabledReason": "WALLET_UNABLE_TO_RECEIVE"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/subscriptions"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_0T1mdomVMi39",
+            "billingType": "BOLETO",
+            "value": 19.9,
+            "nextDueDate": "2017-05-15",
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "interest": {
+              "value": null
+            },
+            "fine": {
+              "value": null,
+              "type": "FIXED"
+            },
+            "cycle": "MONTHLY",
+            "description": "Assinatura Plano Pró",
+            "endDate": null,
+            "maxPayments": null,
+            "externalReference": null,
+            "split": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "externalReference": null,
+                "description": null
+              }
+            ],
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            }
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/subscriptions"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_0T1mdomVMi39",
+            "billingType": "BOLETO",
+            "value": 19.9,
+            "nextDueDate": "2017-05-15",
+            "discount": {
+              "value": 10,
+              "dueDateLimitDays": 0,
+              "type": "PERCENTAGE"
+            },
+            "interest": {
+              "value": null
+            },
+            "fine": {
+              "value": null,
+              "type": "FIXED"
+            },
+            "cycle": "MONTHLY",
+            "description": "Assinatura Plano Pró",
+            "endDate": null,
+            "maxPayments": null,
+            "externalReference": null,
+            "split": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "externalReference": null,
+                "description": null
+              }
+            ],
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            }
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

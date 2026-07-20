@@ -1,0 +1,312 @@
+info:
+  name: Atualizar nota fiscal
+  type: http
+  seq: 3
+  tags:
+    - Notas fiscais
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v3/invoices/:id"
+  params:
+    - name: id
+      value: inv_000000000232
+      type: path
+      description: Identificador único da nota fiscal no Asaas
+  body:
+    type: json
+    data: |-
+      {
+        "serviceDescription": null,
+        "observations": "Mensal referente aos trabalhos de Junho.",
+        "externalReference": null,
+        "value": 300,
+        "deductions": 10,
+        "effectiveDate": "2024-08-20",
+        "updatePayment": null,
+        "taxes": {
+          "nbsCode": "01.01",
+          "taxSituationCode": "011",
+          "taxClassificationCode": "011001",
+          "operationIndicatorCode": "020101",
+          "retainIss": true,
+          "iss": 2,
+          "pisCofinsRetentionType": "NOT_WITHHELD",
+          "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+          "operationPis": 0.65,
+          "operationCofins": 3,
+          "useTaxSystemReformNT007": true,
+          "pis": 0.65,
+          "cofins": 3,
+          "csll": 9,
+          "inss": 11,
+          "ir": 1.5
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/invoices/:id"
+      method: PUT
+      params:
+        - name: id
+          value: inv_000000000232
+          type: path
+          description: Identificador único da nota fiscal no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "serviceDescription": null,
+            "observations": "Mensal referente aos trabalhos de Junho.",
+            "externalReference": null,
+            "value": 300,
+            "deductions": 10,
+            "effectiveDate": "2024-08-20",
+            "updatePayment": null,
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "invoice",
+            "id": "inv_000000000232",
+            "status": "SCHEDULED",
+            "customer": "cus_000000002750",
+            "payment": "pay_145059895800",
+            "installment": null,
+            "type": "NFS-e",
+            "statusDescription": null,
+            "serviceDescription": "Nota fiscal da Fatura 101940. \nDescrição dos Serviços: ANÁLISE E DESENVOLVIMENTO DE SISTEMAS",
+            "pdfUrl": null,
+            "xmlUrl": null,
+            "rpsSerie": null,
+            "rpsNumber": null,
+            "number": null,
+            "validationCode": null,
+            "value": 300,
+            "deductions": 10,
+            "effectiveDate": "2024-08-15",
+            "observations": "Mensal referente aos trabalhos de Junho.",
+            "estimatedTaxesDescription": null,
+            "externalReference": null,
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5,
+              "stateIbs": 0.1,
+              "stateIbsValue": 0.3,
+              "municipalIbs": 0,
+              "municipalIbsValue": 0,
+              "cbs": 0.9,
+              "cbsValue": 2.7
+            },
+            "municipalServiceId": null,
+            "municipalServiceCode": "1.01",
+            "municipalServiceName": "Análise e desenvolvimento de sistemas"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/invoices/:id"
+      method: PUT
+      params:
+        - name: id
+          value: inv_000000000232
+          type: path
+          description: Identificador único da nota fiscal no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "serviceDescription": null,
+            "observations": "Mensal referente aos trabalhos de Junho.",
+            "externalReference": null,
+            "value": 300,
+            "deductions": 10,
+            "effectiveDate": "2024-08-20",
+            "updatePayment": null,
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/invoices/:id"
+      method: PUT
+      params:
+        - name: id
+          value: inv_000000000232
+          type: path
+          description: Identificador único da nota fiscal no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "serviceDescription": null,
+            "observations": "Mensal referente aos trabalhos de Junho.",
+            "externalReference": null,
+            "value": 300,
+            "deductions": 10,
+            "effectiveDate": "2024-08-20",
+            "updatePayment": null,
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/invoices/:id"
+      method: PUT
+      params:
+        - name: id
+          value: inv_000000000232
+          type: path
+          description: Identificador único da nota fiscal no Asaas
+      body:
+        type: json
+        data: |-
+          {
+            "serviceDescription": null,
+            "observations": "Mensal referente aos trabalhos de Junho.",
+            "externalReference": null,
+            "value": 300,
+            "deductions": 10,
+            "effectiveDate": "2024-08-20",
+            "updatePayment": null,
+            "taxes": {
+              "nbsCode": "01.01",
+              "taxSituationCode": "011",
+              "taxClassificationCode": "011001",
+              "operationIndicatorCode": "020101",
+              "retainIss": true,
+              "iss": 2,
+              "pisCofinsRetentionType": "NOT_WITHHELD",
+              "pisCofinsTaxStatus": "STANDARD_TAXABLE_OPERATION",
+              "operationPis": 0.65,
+              "operationCofins": 3,
+              "useTaxSystemReformNT007": true,
+              "pis": 0.65,
+              "cofins": 3,
+              "csll": 9,
+              "inss": 11,
+              "ir": 1.5
+            }
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

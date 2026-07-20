@@ -1,0 +1,178 @@
+info:
+  name: Tokenização de cartão de crédito
+  type: http
+  seq: 1
+  tags:
+    - Cartão de crédito
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/creditCard/tokenizeCreditCard"
+  body:
+    type: json
+    data: |-
+      {
+        "customer": "cus_G7Dvo4iphUNk",
+        "creditCard": {
+          "holderName": "John Doe",
+          "number": "1234567890123456",
+          "expiryMonth": "7",
+          "expiryYear": "2026",
+          "ccv": "123"
+        },
+        "creditCardHolderInfo": {
+          "name": "John Doe",
+          "email": "john.doe@asaas.com",
+          "cpfCnpj": "12345678901",
+          "postalCode": "12345678",
+          "addressNumber": "123",
+          "addressComplement": null,
+          "phone": null,
+          "mobilePhone": null
+        },
+        "remoteIp": "116.213.42.532"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/creditCard/tokenizeCreditCard"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_G7Dvo4iphUNk",
+            "creditCard": {
+              "holderName": "John Doe",
+              "number": "1234567890123456",
+              "expiryMonth": "7",
+              "expiryYear": "2026",
+              "ccv": "123"
+            },
+            "creditCardHolderInfo": {
+              "name": "John Doe",
+              "email": "john.doe@asaas.com",
+              "cpfCnpj": "12345678901",
+              "postalCode": "12345678",
+              "addressNumber": "123",
+              "addressComplement": null,
+              "phone": null,
+              "mobilePhone": null
+            },
+            "remoteIp": "116.213.42.532"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "creditCardNumber": "8829",
+            "creditCardBrand": "VISA",
+            "creditCardToken": "a75a1d98-c52d-4a6b-a413-71e00b193c99"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/creditCard/tokenizeCreditCard"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_G7Dvo4iphUNk",
+            "creditCard": {
+              "holderName": "John Doe",
+              "number": "1234567890123456",
+              "expiryMonth": "7",
+              "expiryYear": "2026",
+              "ccv": "123"
+            },
+            "creditCardHolderInfo": {
+              "name": "John Doe",
+              "email": "john.doe@asaas.com",
+              "cpfCnpj": "12345678901",
+              "postalCode": "12345678",
+              "addressNumber": "123",
+              "addressComplement": null,
+              "phone": null,
+              "mobilePhone": null
+            },
+            "remoteIp": "116.213.42.532"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/creditCard/tokenizeCreditCard"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "customer": "cus_G7Dvo4iphUNk",
+            "creditCard": {
+              "holderName": "John Doe",
+              "number": "1234567890123456",
+              "expiryMonth": "7",
+              "expiryYear": "2026",
+              "ccv": "123"
+            },
+            "creditCardHolderInfo": {
+              "name": "John Doe",
+              "email": "john.doe@asaas.com",
+              "cpfCnpj": "12345678901",
+              "postalCode": "12345678",
+              "addressNumber": "123",
+              "addressComplement": null,
+              "phone": null,
+              "mobilePhone": null
+            },
+            "remoteIp": "116.213.42.532"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

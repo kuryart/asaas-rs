@@ -1,0 +1,106 @@
+info:
+  name: Configurar portal emissor de notas fiscais
+  type: http
+  seq: 10
+  tags:
+    - Informações fiscais
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/fiscalInfo/nationalPortal"
+  body:
+    type: json
+    data: |-
+      {
+        "enabled": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/nationalPortal"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "enabled": true
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "success": true
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/nationalPortal"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "enabled": true
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/fiscalInfo/nationalPortal"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "enabled": true
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+
+docs: Aqui é possível habilitar ou desabilitar o uso do portal nacional como emissor de notas fiscais.

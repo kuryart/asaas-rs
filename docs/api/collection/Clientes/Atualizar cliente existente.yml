@@ -1,0 +1,259 @@
+info:
+  name: Atualizar cliente existente
+  type: http
+  seq: 4
+  tags:
+    - Clientes
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v3/customers/:id"
+  params:
+    - name: id
+      value: cus_000005401844
+      type: path
+      description: Identificador único do cliente a ser atualizado
+  body:
+    type: json
+    data: |-
+      {
+        "name": "John Doe",
+        "cpfCnpj": "24971563792",
+        "email": "john.doe@asaas.com.br",
+        "phone": "4738010919",
+        "mobilePhone": "4799376637",
+        "address": "Av. Paulista",
+        "addressNumber": "150",
+        "complement": "Sala 201",
+        "province": "Centro",
+        "postalCode": "01310-000",
+        "externalReference": "12987382",
+        "notificationDisabled": false,
+        "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+        "municipalInscription": "46683695908",
+        "stateInscription": "646681195275",
+        "observations": "ótimo pagador, nenhum problema até o momento",
+        "groupName": null,
+        "company": null,
+        "foreignCustomer": false
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: PUT
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente a ser atualizado
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "cpfCnpj": "24971563792",
+            "email": "john.doe@asaas.com.br",
+            "phone": "4738010919",
+            "mobilePhone": "4799376637",
+            "address": "Av. Paulista",
+            "addressNumber": "150",
+            "complement": "Sala 201",
+            "province": "Centro",
+            "postalCode": "01310-000",
+            "externalReference": "12987382",
+            "notificationDisabled": false,
+            "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+            "municipalInscription": "46683695908",
+            "stateInscription": "646681195275",
+            "observations": "ótimo pagador, nenhum problema até o momento",
+            "groupName": null,
+            "company": null,
+            "foreignCustomer": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "customer",
+            "id": "cus_000005401844",
+            "dateCreated": "2024-07-12",
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "phone": "90999999999",
+            "mobilePhone": "90999999999",
+            "address": "Av. Paulista",
+            "addressNumber": "150",
+            "complement": "Sala 201",
+            "province": "Centro",
+            "city": 12565,
+            "cityName": "São Paulo",
+            "state": "SP",
+            "country": "Brasil",
+            "postalCode": "01310000",
+            "cpfCnpj": "24971563792",
+            "personType": "FISICA",
+            "deleted": false,
+            "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+            "externalReference": "12987382",
+            "notificationDisabled": false,
+            "observations": "ótimo pagador, nenhum problema até o momento",
+            "foreignCustomer": false
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: PUT
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente a ser atualizado
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "cpfCnpj": "24971563792",
+            "email": "john.doe@asaas.com.br",
+            "phone": "4738010919",
+            "mobilePhone": "4799376637",
+            "address": "Av. Paulista",
+            "addressNumber": "150",
+            "complement": "Sala 201",
+            "province": "Centro",
+            "postalCode": "01310-000",
+            "externalReference": "12987382",
+            "notificationDisabled": false,
+            "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+            "municipalInscription": "46683695908",
+            "stateInscription": "646681195275",
+            "observations": "ótimo pagador, nenhum problema até o momento",
+            "groupName": null,
+            "company": null,
+            "foreignCustomer": false
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: PUT
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente a ser atualizado
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "cpfCnpj": "24971563792",
+            "email": "john.doe@asaas.com.br",
+            "phone": "4738010919",
+            "mobilePhone": "4799376637",
+            "address": "Av. Paulista",
+            "addressNumber": "150",
+            "complement": "Sala 201",
+            "province": "Centro",
+            "postalCode": "01310-000",
+            "externalReference": "12987382",
+            "notificationDisabled": false,
+            "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+            "municipalInscription": "46683695908",
+            "stateInscription": "646681195275",
+            "observations": "ótimo pagador, nenhum problema até o momento",
+            "groupName": null,
+            "company": null,
+            "foreignCustomer": false
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: PUT
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente a ser atualizado
+      body:
+        type: json
+        data: |-
+          {
+            "name": "John Doe",
+            "cpfCnpj": "24971563792",
+            "email": "john.doe@asaas.com.br",
+            "phone": "4738010919",
+            "mobilePhone": "4799376637",
+            "address": "Av. Paulista",
+            "addressNumber": "150",
+            "complement": "Sala 201",
+            "province": "Centro",
+            "postalCode": "01310-000",
+            "externalReference": "12987382",
+            "notificationDisabled": false,
+            "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+            "municipalInscription": "46683695908",
+            "stateInscription": "646681195275",
+            "observations": "ótimo pagador, nenhum problema até o momento",
+            "groupName": null,
+            "company": null,
+            "foreignCustomer": false
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

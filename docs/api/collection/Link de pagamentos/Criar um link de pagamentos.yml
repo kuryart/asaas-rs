@@ -1,0 +1,180 @@
+info:
+  name: Criar um link de pagamentos
+  type: http
+  seq: 1
+  tags:
+    - Link de pagamentos
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/paymentLinks"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Venda de livros",
+        "description": "Qualquer livro por apenas R$: 50,00",
+        "endDate": "2024-09-05",
+        "value": 50,
+        "billingType": "UNDEFINED",
+        "chargeType": "DETACHED",
+        "dueDateLimitDays": 10,
+        "subscriptionCycle": "MONTHLY",
+        "maxInstallmentCount": 1,
+        "externalReference": "1287",
+        "notificationEnabled": false,
+        "callback": {
+          "successUrl": null,
+          "autoRedirect": null
+        },
+        "isAddressRequired": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Venda de livros",
+            "description": "Qualquer livro por apenas R$: 50,00",
+            "endDate": "2024-09-05",
+            "value": 50,
+            "billingType": "UNDEFINED",
+            "chargeType": "DETACHED",
+            "dueDateLimitDays": 10,
+            "subscriptionCycle": "MONTHLY",
+            "maxInstallmentCount": 1,
+            "externalReference": "1287",
+            "notificationEnabled": false,
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            },
+            "isAddressRequired": true
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "725104409743",
+            "name": "Venda de livros",
+            "value": 50,
+            "active": true,
+            "chargeType": "DETACHED",
+            "url": "https://www.asaas.com/c/291089675759",
+            "billingType": "UNDEFINED",
+            "subscriptionCycle": "MONTHLY",
+            "description": "Qualquer livro por apenas R$: 50,00",
+            "endDate": "2024-09-05",
+            "deleted": false,
+            "viewCount": 0,
+            "maxInstallmentCount": 1,
+            "dueDateLimitDays": 10,
+            "notificationEnabled": true,
+            "isAddressRequired": true,
+            "externalReference": "056984"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Venda de livros",
+            "description": "Qualquer livro por apenas R$: 50,00",
+            "endDate": "2024-09-05",
+            "value": 50,
+            "billingType": "UNDEFINED",
+            "chargeType": "DETACHED",
+            "dueDateLimitDays": 10,
+            "subscriptionCycle": "MONTHLY",
+            "maxInstallmentCount": 1,
+            "externalReference": "1287",
+            "notificationEnabled": false,
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            },
+            "isAddressRequired": true
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/paymentLinks"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Venda de livros",
+            "description": "Qualquer livro por apenas R$: 50,00",
+            "endDate": "2024-09-05",
+            "value": 50,
+            "billingType": "UNDEFINED",
+            "chargeType": "DETACHED",
+            "dueDateLimitDays": 10,
+            "subscriptionCycle": "MONTHLY",
+            "maxInstallmentCount": 1,
+            "externalReference": "1287",
+            "notificationEnabled": false,
+            "callback": {
+              "successUrl": null,
+              "autoRedirect": null
+            },
+            "isAddressRequired": true
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

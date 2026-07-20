@@ -1,0 +1,537 @@
+info:
+  name: Estatísticas de cobranças
+  type: http
+  seq: 2
+  tags:
+    - Informações financeiras
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/finance/payment/statistics"
+  params:
+    - name: customer
+      value: cus_3EZfkUThUMAt
+      type: query
+      description: Filtrar pelo identificador único do cliente
+    - name: billingType
+      value: BOLETO
+      type: query
+      description: Filtrar por forma de pagamento
+      disabled: true
+    - name: billingType
+      value: CREDIT_CARD
+      type: query
+      description: Filtrar por forma de pagamento
+      disabled: true
+    - name: billingType
+      value: TRANSFER
+      type: query
+      description: Filtrar por forma de pagamento
+      disabled: true
+    - name: billingType
+      value: DEPOSIT
+      type: query
+      description: Filtrar por forma de pagamento
+      disabled: true
+    - name: billingType
+      value: DEBIT_CARD
+      type: query
+      description: Filtrar por forma de pagamento
+      disabled: true
+    - name: billingType
+      value: PIX
+      type: query
+      description: Filtrar por forma de pagamento
+      disabled: true
+    - name: status
+      value: PENDING
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: RECEIVED
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: CONFIRMED
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: status
+      value: OVERDUE
+      type: query
+      description: Filtrar por status
+      disabled: true
+    - name: anticipated
+      value: "false"
+      type: query
+      description: Filtrar registros antecipados ou não
+    - name: dateCreated[ge]
+      value: 2023-01-01
+      type: query
+      description: Filtrar a partir da data de criação inicial
+    - name: dateCreated[le]
+      value: 2023-01-01
+      type: query
+      description: Filtrar a partir da data de criação final
+    - name: dueDate[ge]
+      value: 2023-01-01
+      type: query
+      description: Filtrar a partir da data de vencimento inicial
+    - name: dueDate[le]
+      value: 2023-01-01
+      type: query
+      description: Filtrar a partir da data de vencimento final
+    - name: estimatedCreditDate[ge]
+      value: 2023-01-01
+      type: query
+      description: Filtrar a partir da data estimada de crédito inicial
+    - name: estimatedCreditDate[le]
+      value: 2023-01-01
+      type: query
+      description: Filtrar a partir da data estimada de crédito final
+    - name: externalReference
+      value: "056984"
+      type: query
+      description: Filtrar pelo identificador do seu sistema
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/finance/payment/statistics"
+      method: GET
+      params:
+        - name: customer
+          value: cus_3EZfkUThUMAt
+          type: query
+          description: Filtrar pelo identificador único do cliente
+        - name: billingType
+          value: BOLETO
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: CREDIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: TRANSFER
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEPOSIT
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEBIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: PIX
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: RECEIVED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CONFIRMED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: OVERDUE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: anticipated
+          value: "false"
+          type: query
+          description: Filtrar registros antecipados ou não
+        - name: dateCreated[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação inicial
+        - name: dateCreated[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação final
+        - name: dueDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento inicial
+        - name: dueDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento final
+        - name: estimatedCreditDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito inicial
+        - name: estimatedCreditDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito final
+        - name: externalReference
+          value: "056984"
+          type: query
+          description: Filtrar pelo identificador do seu sistema
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "quantity": 23,
+            "value": 9270.4,
+            "netValue": 9121.54
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/finance/payment/statistics"
+      method: GET
+      params:
+        - name: customer
+          value: cus_3EZfkUThUMAt
+          type: query
+          description: Filtrar pelo identificador único do cliente
+        - name: billingType
+          value: BOLETO
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: CREDIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: TRANSFER
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEPOSIT
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEBIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: PIX
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: RECEIVED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CONFIRMED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: OVERDUE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: anticipated
+          value: "false"
+          type: query
+          description: Filtrar registros antecipados ou não
+        - name: dateCreated[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação inicial
+        - name: dateCreated[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação final
+        - name: dueDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento inicial
+        - name: dueDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento final
+        - name: estimatedCreditDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito inicial
+        - name: estimatedCreditDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito final
+        - name: externalReference
+          value: "056984"
+          type: query
+          description: Filtrar pelo identificador do seu sistema
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/finance/payment/statistics"
+      method: GET
+      params:
+        - name: customer
+          value: cus_3EZfkUThUMAt
+          type: query
+          description: Filtrar pelo identificador único do cliente
+        - name: billingType
+          value: BOLETO
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: CREDIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: TRANSFER
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEPOSIT
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEBIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: PIX
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: RECEIVED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CONFIRMED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: OVERDUE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: anticipated
+          value: "false"
+          type: query
+          description: Filtrar registros antecipados ou não
+        - name: dateCreated[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação inicial
+        - name: dateCreated[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação final
+        - name: dueDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento inicial
+        - name: dueDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento final
+        - name: estimatedCreditDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito inicial
+        - name: estimatedCreditDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito final
+        - name: externalReference
+          value: "056984"
+          type: query
+          description: Filtrar pelo identificador do seu sistema
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/finance/payment/statistics"
+      method: GET
+      params:
+        - name: customer
+          value: cus_3EZfkUThUMAt
+          type: query
+          description: Filtrar pelo identificador único do cliente
+        - name: billingType
+          value: BOLETO
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: CREDIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: TRANSFER
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEPOSIT
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: DEBIT_CARD
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: billingType
+          value: PIX
+          type: query
+          description: Filtrar por forma de pagamento
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: RECEIVED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: CONFIRMED
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: status
+          value: OVERDUE
+          type: query
+          description: Filtrar por status
+          disabled: true
+        - name: anticipated
+          value: "false"
+          type: query
+          description: Filtrar registros antecipados ou não
+        - name: dateCreated[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação inicial
+        - name: dateCreated[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de criação final
+        - name: dueDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento inicial
+        - name: dueDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data de vencimento final
+        - name: estimatedCreditDate[ge]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito inicial
+        - name: estimatedCreditDate[le]
+          value: 2023-01-01
+          type: query
+          description: Filtrar a partir da data estimada de crédito final
+        - name: externalReference
+          value: "056984"
+          type: query
+          description: Filtrar pelo identificador do seu sistema
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+
+docs: |-
+  Retorna valores totais das cobranças da sua conta Asaas de acordo com os filtros informados.
+   ### Exemplos de filtros: 
+   Valor total a receber: `GET https://api.asaas.com/v3/finance/payment/statistics?status=PENDING` 
+
+   Valor total a receber com cobranças por boleto bancário: `GET https://api.asaas.com/v3/finance/payment/statistics?billingType=BOLETO&status=PENDING`
+
+   Valor total recebido por cobranças por cartão de crédito: `GET https://api.asaas.com/v3/finance/payment/statistics?billingType=CREDIT_CARD&status=RECEIVED`

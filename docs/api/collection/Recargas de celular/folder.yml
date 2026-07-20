@@ -1,0 +1,7 @@
+info:
+  name: Recargas de celular
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

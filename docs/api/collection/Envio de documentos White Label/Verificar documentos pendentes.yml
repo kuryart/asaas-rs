@@ -1,0 +1,112 @@
+info:
+  name: Verificar documentos pendentes
+  type: http
+  seq: 1
+  tags:
+    - Envio de documentos White Label
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/myAccount/documents"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "rejectReasons": null,
+            "data": [
+              {
+                "id": "172ed152-4fa4-43ad-9b69-39c323e9526c",
+                "status": "NOT_SENT",
+                "type": "MINUTES_OF_CONSTITUTION",
+                "title": "Ata de eleição da última diretoria",
+                "description": "Não possui descrição",
+                "responsible": {
+                  "name": "John Doe",
+                  "type": "ASSOCIATION"
+                },
+                "onboardingUrl": "https://example.com/cadastro.io/8ad196d6cbfcc5d05bfabcbb5c730f6a",
+                "onboardingUrlExpirationDate": "2025-03-04 00:00:00",
+                "documents": [
+                  {
+                    "id": "8d257732-2220-11ec-b695-b6af4a64184d",
+                    "status": "PENDING"
+                  }
+                ]
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents"
+      method: GET
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/myAccount/documents"
+      method: GET
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,147 @@
+info:
+  name: Recuperar uma única negativação
+  type: http
+  seq: 4
+  tags:
+    - Negativações
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/paymentDunnings/:id"
+  params:
+    - name: id
+      value: ce35702d-0d9f-475a-ba46-e251ad265c91
+      type: path
+      description: Identificador único da negativação no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id"
+      method: GET
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "ce35702d-0d9f-475a-ba46-e251ad265c91",
+            "dunningNumber": 15,
+            "status": "PENDING",
+            "type": "CREDIT_BUREAU",
+            "requestDate": "2020-05-26",
+            "description": "Duas mesas com 8 cadeiras solicitadas via encomenda no dia 01/05/2018",
+            "value": 80,
+            "feeValue": 8,
+            "netValue": 72,
+            "receivedInCashFeeValue": 0,
+            "denialReason": null,
+            "cancellationFeeValue": 0,
+            "canBeCancelled": null,
+            "cannotBeCancelledReason": null,
+            "isNecessaryResendDocumentation": null,
+            "payment": "pay_080225913252"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id"
+      method: GET
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id"
+      method: GET
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id"
+      method: GET
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/paymentDunnings/:id"
+      method: GET
+      params:
+        - name: id
+          value: ce35702d-0d9f-475a-ba46-e251ad265c91
+          type: path
+          description: Identificador único da negativação no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

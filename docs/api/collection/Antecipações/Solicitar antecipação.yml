@@ -1,0 +1,153 @@
+info:
+  name: Solicitar antecipação
+  type: http
+  seq: 1
+  tags:
+    - Antecipações
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/anticipations"
+  body:
+    type: multipart-form
+    data:
+      - name: installment
+        type: text
+        value: ""
+        description: ID do parcelamento a ser antecipado
+      - name: payment
+        type: text
+        value: pay_626366773834
+        description: ID da cobrança a ser antecipada
+      - name: documents
+        type: file
+        value: []
+        description: Arquivo
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/anticipations"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: installment
+            type: text
+            value: ""
+            description: ID do parcelamento a ser antecipado
+          - name: payment
+            type: text
+            value: pay_626366773834
+            description: ID da cobrança a ser antecipada
+          - name: documents
+            type: file
+            value: []
+            description: Arquivo
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "receivableAnticipation",
+            "id": "9e7d8639-350f-45c0-8bc3-d4ddc5f4ebac",
+            "installment": null,
+            "payment": "pay_626366773834",
+            "status": "PENDING",
+            "anticipationDate": "2019-05-20",
+            "dueDate": "2019-05-26",
+            "requestDate": "2019-05-14",
+            "fee": 2.33,
+            "anticipationDays": 5,
+            "netValue": 73.68,
+            "totalValue": 80,
+            "value": 76.01,
+            "denialObservation": null
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/anticipations"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: installment
+            type: text
+            value: ""
+            description: ID do parcelamento a ser antecipado
+          - name: payment
+            type: text
+            value: pay_626366773834
+            description: ID da cobrança a ser antecipada
+          - name: documents
+            type: file
+            value: []
+            description: Arquivo
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/anticipations"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: installment
+            type: text
+            value: ""
+            description: ID do parcelamento a ser antecipado
+          - name: payment
+            type: text
+            value: pay_626366773834
+            description: ID da cobrança a ser antecipada
+          - name: documents
+            type: file
+            value: []
+            description: Arquivo
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

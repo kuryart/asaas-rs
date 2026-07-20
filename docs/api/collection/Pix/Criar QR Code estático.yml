@@ -1,0 +1,138 @@
+info:
+  name: Criar QR Code estático
+  type: http
+  seq: 5
+  tags:
+    - Pix
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/pix/qrCodes/static"
+  body:
+    type: json
+    data: |-
+      {
+        "addressKey": "b6295ee1-f054-47d1-9e90-ee57b74f60d9",
+        "description": "Churrasco",
+        "value": 50,
+        "format": "ALL",
+        "expirationDate": "2023-05-05 14:20:50",
+        "expirationSeconds": null,
+        "allowsMultiplePayments": true,
+        "externalReference": null
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/qrCodes/static"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "addressKey": "b6295ee1-f054-47d1-9e90-ee57b74f60d9",
+            "description": "Churrasco",
+            "value": 50,
+            "format": "ALL",
+            "expirationDate": "2023-05-05 14:20:50",
+            "expirationSeconds": null,
+            "allowsMultiplePayments": true,
+            "externalReference": null
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "9bea9bcd126b45c7939960f577be84d6",
+            "encodedImage": "QRCODE IMAGE IN BASE64",
+            "payload": "00020126580014br.gov.bcb.pix0136a9fe43bc-164d-44d1-91c2-2f9b4d6956e95204000053039865802BR5925Churrasco6009Joinville62290525JOAOSILVA00000055ASA6304E62B",
+            "allowsMultiplePayments": true,
+            "expirationDate": "2023-05-05 14:20:5",
+            "externalReference": null,
+            "description": "Churrasco"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/qrCodes/static"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "addressKey": "b6295ee1-f054-47d1-9e90-ee57b74f60d9",
+            "description": "Churrasco",
+            "value": 50,
+            "format": "ALL",
+            "expirationDate": "2023-05-05 14:20:50",
+            "expirationSeconds": null,
+            "allowsMultiplePayments": true,
+            "externalReference": null
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/qrCodes/static"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "addressKey": "b6295ee1-f054-47d1-9e90-ee57b74f60d9",
+            "description": "Churrasco",
+            "value": 50,
+            "format": "ALL",
+            "expirationDate": "2023-05-05 14:20:50",
+            "expirationSeconds": null,
+            "allowsMultiplePayments": true,
+            "externalReference": null
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

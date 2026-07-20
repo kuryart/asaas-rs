@@ -1,0 +1,4 @@
+name: Produção
+variables:
+  - name: baseUrl
+    value: https://api.asaas.com

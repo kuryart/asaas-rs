@@ -1,0 +1,209 @@
+info:
+  name: Atualizar splits do parcelamento
+  type: http
+  seq: 10
+  tags:
+    - Parcelamentos
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/v3/installments/:id/splits"
+  params:
+    - name: id
+      value: 2765d086-c7c5-5cca-898a-4262d212587c
+      type: path
+      description: ID do parcelamento
+  body:
+    type: json
+    data: |-
+      {
+        "splits": [
+          {
+            "walletId": null,
+            "fixedValue": null,
+            "percentualValue": null,
+            "totalFixedValue": null,
+            "externalReference": null,
+            "description": null,
+            "installmentNumber": null
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/installments/:id/splits"
+      method: PUT
+      params:
+        - name: id
+          value: 2765d086-c7c5-5cca-898a-4262d212587c
+          type: path
+          description: ID do parcelamento
+      body:
+        type: json
+        data: |-
+          {
+            "splits": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null,
+                "installmentNumber": null
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "splits": [
+              {
+                "id": "fd41396a-7453-47d0-9411-c8543522591d",
+                "walletId": "7bafd95a-e783-4a62-9be1-23999af742c6",
+                "fixedValue": 20.32,
+                "percentualValue": null,
+                "totalValue": 20.32,
+                "cancellationReason": "MANUAL_CANCELLATION",
+                "status": "PENDING",
+                "externalReference": null,
+                "description": null,
+                "installmentNumber": null
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/installments/:id/splits"
+      method: PUT
+      params:
+        - name: id
+          value: 2765d086-c7c5-5cca-898a-4262d212587c
+          type: path
+          description: ID do parcelamento
+      body:
+        type: json
+        data: |-
+          {
+            "splits": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null,
+                "installmentNumber": null
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/installments/:id/splits"
+      method: PUT
+      params:
+        - name: id
+          value: 2765d086-c7c5-5cca-898a-4262d212587c
+          type: path
+          description: ID do parcelamento
+      body:
+        type: json
+        data: |-
+          {
+            "splits": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null,
+                "installmentNumber": null
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/installments/:id/splits"
+      method: PUT
+      params:
+        - name: id
+          value: 2765d086-c7c5-5cca-898a-4262d212587c
+          type: path
+          description: ID do parcelamento
+      body:
+        type: json
+        data: |-
+          {
+            "splits": [
+              {
+                "walletId": null,
+                "fixedValue": null,
+                "percentualValue": null,
+                "totalFixedValue": null,
+                "externalReference": null,
+                "description": null,
+                "installmentNumber": null
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

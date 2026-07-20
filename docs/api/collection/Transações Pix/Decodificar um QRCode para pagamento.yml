@@ -1,0 +1,143 @@
+info:
+  name: Decodificar um QRCode para pagamento
+  type: http
+  seq: 2
+  tags:
+    - Transações Pix
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/pix/qrCodes/decode"
+  body:
+    type: json
+    data: |-
+      {
+        "payload": "00020101021226730014br.gov.bcb.pix2551pix-h.asaas.com/pixqrcode/cobv/pay_76575613967995145204000053039865802BR5905ASAAS6009Joinville61088922827162070503***63045E7A",
+        "changeValue": null,
+        "expectedPaymentDate": "2026-01-01"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/qrCodes/decode"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "payload": "00020101021226730014br.gov.bcb.pix2551pix-h.asaas.com/pixqrcode/cobv/pay_76575613967995145204000053039865802BR5905ASAAS6009Joinville61088922827162070503***63045E7A",
+            "changeValue": null,
+            "expectedPaymentDate": "2026-01-01"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "payload": "00020101021226730014br.gov.bcb.pix2551pix-h.asaas.com/pixqrcode/cobv/pay_76575613967995145204000053039865802BR5905ASAAS6009Joinville61088922827162070503***63045E7A",
+            "type": "DYNAMIC",
+            "transactionOriginType": "DYNAMIC_QRCODE",
+            "pixKey": "f9560206-807f-4273-ad72-d9ba9ddd867b",
+            "conciliationIdentifier": "dcabae5bbfb6nffbb87c69388365648",
+            "dueDate": "2030-02-05",
+            "expirationDate": "030-02-10 11:00:00",
+            "finality": "CHANGE",
+            "value": 100,
+            "changeValue": 2,
+            "interest": 1,
+            "fine": 3,
+            "discount": 5,
+            "totalValue": 99,
+            "canBePaidWithDifferentValue": true,
+            "canBeModifyChangeValue": false,
+            "receiver": {
+              "ispb": null,
+              "ispbName": null,
+              "name": null,
+              "tradingName": null,
+              "cpfCnpj": null,
+              "personType": "JURIDICA",
+              "accountType": "CHECKING_ACCOUNT"
+            },
+            "payer": {
+              "name": "Elon Musk",
+              "cpfCnpj": "***.456.789-**"
+            },
+            "description": null,
+            "canBePaid": true,
+            "cannotBePaidReason": null
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/qrCodes/decode"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "payload": "00020101021226730014br.gov.bcb.pix2551pix-h.asaas.com/pixqrcode/cobv/pay_76575613967995145204000053039865802BR5905ASAAS6009Joinville61088922827162070503***63045E7A",
+            "changeValue": null,
+            "expectedPaymentDate": "2026-01-01"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/qrCodes/decode"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "payload": "00020101021226730014br.gov.bcb.pix2551pix-h.asaas.com/pixqrcode/cobv/pay_76575613967995145204000053039865802BR5905ASAAS6009Joinville61088922827162070503***63045E7A",
+            "changeValue": null,
+            "expectedPaymentDate": "2026-01-01"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

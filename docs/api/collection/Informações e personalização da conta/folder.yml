@@ -1,0 +1,7 @@
+info:
+  name: Informações e personalização da conta
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

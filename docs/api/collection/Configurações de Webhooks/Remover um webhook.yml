@@ -1,0 +1,119 @@
+info:
+  name: Remover um webhook
+  type: http
+  seq: 5
+  tags:
+    - Configurações de Webhooks
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v3/webhooks/:id"
+  params:
+    - name: id
+      value: bbf67496-1379-4b6d-a348-fd5fa229f1c
+      type: path
+      description: Identificador único do webhook
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/webhooks/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: bbf67496-1379-4b6d-a348-fd5fa229f1c
+          type: path
+          description: Identificador único do webhook
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "deleted": false,
+            "id": "bbf67496-1379-4b6d-a348-fd5fa229f1c"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/webhooks/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: bbf67496-1379-4b6d-a348-fd5fa229f1c
+          type: path
+          description: Identificador único do webhook
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/webhooks/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: bbf67496-1379-4b6d-a348-fd5fa229f1c
+          type: path
+          description: Identificador único do webhook
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/webhooks/:id"
+      method: DELETE
+      params:
+        - name: id
+          value: bbf67496-1379-4b6d-a348-fd5fa229f1c
+          type: path
+          description: Identificador único do webhook
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+
+docs: Este endpoint remove um webhook.

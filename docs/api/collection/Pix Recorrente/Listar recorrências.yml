@@ -1,0 +1,324 @@
+info:
+  name: Listar recorrências
+  type: http
+  seq: 1
+  tags:
+    - Pix Recorrente
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/pix/transactions/recurrings"
+  params:
+    - name: offset
+      value: "0"
+      type: query
+      description: Elemento inicial da lista
+    - name: limit
+      value: "10"
+      type: query
+      description: "Número de elementos da lista (max: 100)"
+    - name: status
+      value: AWAITING_CRITICAL_ACTION_AUTHORIZATION
+      type: query
+      description: Filtrar pelo status da recorrência
+      disabled: true
+    - name: status
+      value: PENDING
+      type: query
+      description: Filtrar pelo status da recorrência
+      disabled: true
+    - name: status
+      value: SCHEDULED
+      type: query
+      description: Filtrar pelo status da recorrência
+      disabled: true
+    - name: status
+      value: CANCELLED
+      type: query
+      description: Filtrar pelo status da recorrência
+      disabled: true
+    - name: status
+      value: DONE
+      type: query
+      description: Filtrar pelo status da recorrência
+      disabled: true
+    - name: value
+      value: "100"
+      type: query
+      description: Filtrar pelo valor da recorrência
+    - name: searchText
+      value: "null"
+      type: query
+      description: Filtrar pelo nome do recebedor
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/recurrings"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_CRITICAL_ACTION_AUTHORIZATION
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: SCHEDULED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: value
+          value: "100"
+          type: query
+          description: Filtrar pelo valor da recorrência
+        - name: searchText
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do recebedor
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "list",
+            "hasMore": false,
+            "totalCount": 2,
+            "limit": 10,
+            "offset": 0,
+            "data": [
+              {
+                "id": "35363f6e-93e2-11ec-b9d9-96f4053b1bd4",
+                "status": "PENDING",
+                "origin": "PIX",
+                "value": 0.02,
+                "frequency": "WEEKLY",
+                "quantity": 2,
+                "startDate": "2024-09-18",
+                "finishDate": "2024-09-25",
+                "canBeCancelled": true,
+                "externalAccount": {
+                  "name": "John Doe",
+                  "financialInstitutionName": "Banco exemplo S.A",
+                  "cpfCnpj": "***.456.789-**",
+                  "pixKey": "***.456.789-**"
+                }
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/recurrings"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_CRITICAL_ACTION_AUTHORIZATION
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: SCHEDULED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: value
+          value: "100"
+          type: query
+          description: Filtrar pelo valor da recorrência
+        - name: searchText
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do recebedor
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/recurrings"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_CRITICAL_ACTION_AUTHORIZATION
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: SCHEDULED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: value
+          value: "100"
+          type: query
+          description: Filtrar pelo valor da recorrência
+        - name: searchText
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do recebedor
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/pix/transactions/recurrings"
+      method: GET
+      params:
+        - name: offset
+          value: "0"
+          type: query
+          description: Elemento inicial da lista
+        - name: limit
+          value: "10"
+          type: query
+          description: "Número de elementos da lista (max: 100)"
+        - name: status
+          value: AWAITING_CRITICAL_ACTION_AUTHORIZATION
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: PENDING
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: SCHEDULED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: CANCELLED
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: status
+          value: DONE
+          type: query
+          description: Filtrar pelo status da recorrência
+          disabled: true
+        - name: value
+          value: "100"
+          type: query
+          description: Filtrar pelo valor da recorrência
+        - name: searchText
+          value: "null"
+          type: query
+          description: Filtrar pelo nome do recebedor
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""

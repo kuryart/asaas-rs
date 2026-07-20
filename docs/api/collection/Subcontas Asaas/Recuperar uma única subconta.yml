@@ -1,0 +1,162 @@
+info:
+  name: Recuperar uma única subconta
+  type: http
+  seq: 3
+  tags:
+    - Subcontas Asaas
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/accounts/:id"
+  params:
+    - name: id
+      value: 4f468235-cec3-482f-b3d0-348af4c7194
+      type: path
+      description: Identificador único da subconta no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: GET
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "account",
+            "id": "4f468235-cec3-482f-b3d0-348af4c7194",
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "loginEmail": "john.doe@asaas.com.br",
+            "phone": null,
+            "mobilePhone": null,
+            "address": "Rua Fernando Orlandi",
+            "addressNumber": "544",
+            "complement": null,
+            "province": "Jardim Pedra Branca",
+            "postalCode": "14079-452",
+            "cpfCnpj": "35381637000150",
+            "birthDate": "1995-04-12",
+            "personType": "JURIDICA",
+            "companyType": "MEI",
+            "city": 15478,
+            "state": "SP",
+            "country": "Brasil",
+            "tradingName": null,
+            "site": "https://www.example.com",
+            "walletId": "c0c1688f-636b-42c0-b6ee-7339182276b7",
+            "accountNumber": {
+              "agency": "0001",
+              "account": "3514",
+              "accountDigit": "3"
+            },
+            "commercialInfoExpiration": {
+              "isExpired": false,
+              "scheduledDate": "2025-05-05 00:00:00"
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: GET
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: GET
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: GET
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id"
+      method: GET
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

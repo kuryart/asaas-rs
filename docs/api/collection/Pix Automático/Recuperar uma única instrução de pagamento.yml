@@ -1,0 +1,144 @@
+info:
+  name: Recuperar uma única instrução de pagamento
+  type: http
+  seq: 5
+  tags:
+    - Pix Automático
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id"
+  params:
+    - name: id
+      value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+      type: path
+      description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id"
+      method: GET
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c",
+            "endToEndIdentifier": "E00416968202111161635q5bk0brYk2C",
+            "authorization": {
+              "id": "35363f6e-93e2-11ec-b9d9-96f4053b1bd4",
+              "endToEndIdentifier": "RR1234567820240115abcdefghijk",
+              "customerId": "cus_000005735721"
+            },
+            "dueDate": "2020-01-31",
+            "status": "SCHEDULED",
+            "paymentId": "pay_tsp88gie3b5e6o2p",
+            "purpose": "RETRY_AFTER_DUE_DATE",
+            "refusalReason": null,
+            "retryAttempt": 1
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id"
+      method: GET
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id"
+      method: GET
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id"
+      method: GET
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/pix/automatic/paymentInstructions/:id"
+      method: GET
+      params:
+        - name: id
+          value: cbfdf6ef-9bd8-48ba-b8cd-efd61a9f614c
+          type: path
+          description: Identificador único da instrução de pagamento de Pix Automático no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

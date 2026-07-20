@@ -1,0 +1,117 @@
+info:
+  name: Simular antecipação
+  type: http
+  seq: 3
+  tags:
+    - Antecipações
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/anticipations/simulate"
+  body:
+    type: json
+    data: |-
+      {
+        "installment": null,
+        "payment": "pay_626366773834"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/anticipations/simulate"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "installment": null,
+            "payment": "pay_626366773834"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "installment": null,
+            "payment": "pay_626366773834",
+            "anticipationDate": "2019-05-20",
+            "dueDate": "2019-05-26",
+            "fee": 2.33,
+            "anticipationDays": 6,
+            "netValue": 73.68,
+            "totalValue": 80,
+            "value": 76.01,
+            "isDocumentationRequired": false
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/anticipations/simulate"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "installment": null,
+            "payment": "pay_626366773834"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/anticipations/simulate"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "installment": null,
+            "payment": "pay_626366773834"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }

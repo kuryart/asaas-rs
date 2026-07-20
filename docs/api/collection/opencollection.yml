@@ -1,0 +1,17 @@
+opencollection: 1.0.0
+
+info:
+  name: Asaas
+
+request:
+  auth:
+    type: apikey
+    key: access_token
+    value: "{{apiKey}}"
+    placement: header
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

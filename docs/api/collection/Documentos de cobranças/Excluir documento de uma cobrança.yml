@@ -1,0 +1,137 @@
+info:
+  name: Excluir documento de uma cobrança
+  type: http
+  seq: 5
+  tags:
+    - Documentos de cobranças
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/v3/payments/:id/documents/:documentId"
+  params:
+    - name: id
+      value: "null"
+      type: path
+      description: Identificador único da cobrança no Asaas
+    - name: documentId
+      value: "null"
+      type: path
+      description: Identificador único do documento
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/documents/:documentId"
+      method: DELETE
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+        - name: documentId
+          value: "null"
+          type: path
+          description: Identificador único do documento
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "deleted": true,
+            "id": "609a3f98-8db7-4a89-b511-de4c3be6d462"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/documents/:documentId"
+      method: DELETE
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+        - name: documentId
+          value: "null"
+          type: path
+          description: Identificador único do documento
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/documents/:documentId"
+      method: DELETE
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+        - name: documentId
+          value: "null"
+          type: path
+          description: Identificador único do documento
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/payments/:id/documents/:documentId"
+      method: DELETE
+      params:
+        - name: id
+          value: "null"
+          type: path
+          description: Identificador único da cobrança no Asaas
+        - name: documentId
+          value: "null"
+          type: path
+          description: Identificador único do documento
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,127 @@
+info:
+  name: Reenviar link de ativação para subconta não-BaaS
+  type: http
+  seq: 5
+  tags:
+    - Subcontas Asaas
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v3/accounts/:id/resendActivationLink"
+  params:
+    - name: id
+      value: 4f468235-cec3-482f-b3d0-348af4c7194
+      type: path
+      description: Identificador único da subconta no Asaas
+  body:
+    type: json
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 204 Response
+    description: No Content
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/resendActivationLink"
+      method: POST
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/resendActivationLink"
+      method: POST
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_action",
+                "description": "O link de ativação já foi reenviado para esta subconta."
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/resendActivationLink"
+      method: POST
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/accounts/:id/resendActivationLink"
+      method: POST
+      params:
+        - name: id
+          value: 4f468235-cec3-482f-b3d0-348af4c7194
+          type: path
+          description: Identificador único da subconta no Asaas
+      body:
+        type: json
+        data: "{}"
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""
+
+docs: Reenvia o link de redefinição de senha da subconta não-BaaS. Este reenvio pode ser feito apenas uma vez e tem o intuito de recuperar o acesso pelo e-mail cadastrado no login da subconta.

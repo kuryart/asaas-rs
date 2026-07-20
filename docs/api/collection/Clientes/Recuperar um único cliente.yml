@@ -1,0 +1,155 @@
+info:
+  name: Recuperar um único cliente
+  type: http
+  seq: 3
+  tags:
+    - Clientes
+
+http:
+  method: GET
+  url: "{{baseUrl}}/v3/customers/:id"
+  params:
+    - name: id
+      value: cus_000005401844
+      type: path
+      description: Identificador único do cliente no Asaas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: Ok
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: GET
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente no Asaas
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "object": "customer",
+            "id": "cus_000005401844",
+            "dateCreated": "2024-07-12",
+            "name": "John Doe",
+            "email": "john.doe@asaas.com.br",
+            "phone": "90999999999",
+            "mobilePhone": "90999999999",
+            "address": "Av. Paulista",
+            "addressNumber": "150",
+            "complement": "Sala 201",
+            "province": "Centro",
+            "city": 12565,
+            "cityName": "São Paulo",
+            "state": "SP",
+            "country": "Brasil",
+            "postalCode": "01310000",
+            "cpfCnpj": "24971563792",
+            "personType": "FISICA",
+            "deleted": false,
+            "additionalEmails": "john.doe@asaas.com,john.doe.silva@asaas.com.br",
+            "externalReference": "12987382",
+            "notificationDisabled": false,
+            "observations": "ótimo pagador, nenhum problema até o momento",
+            "foreignCustomer": false
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: GET
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente no Asaas
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "error_code",
+                "description": "Descrição do erro"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: GET
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente no Asaas
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "errors": [
+              {
+                "code": "invalid_access_token",
+                "description": "A chave de API fornecida é inválida"
+              }
+            ]
+          }
+  - name: 403 Response
+    description: Forbidden. Ocorre quando o body da requisição está preenchido, chamadas de método GET precisam ter um body vazio.
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: GET
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente no Asaas
+    response:
+      status: 403
+      statusText: Forbidden
+      body:
+        type: text
+        data: ""
+  - name: 404 Response
+    description: Not found
+    request:
+      url: "{{baseUrl}}/v3/customers/:id"
+      method: GET
+      params:
+        - name: id
+          value: cus_000005401844
+          type: path
+          description: Identificador único do cliente no Asaas
+    response:
+      status: 404
+      statusText: Not Found
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,4 @@
+name: Sandbox
+variables:
+  - name: baseUrl
+    value: https://api-sandbox.asaas.com
